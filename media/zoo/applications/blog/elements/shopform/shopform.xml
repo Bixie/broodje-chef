@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="checkbox" group="Shop" orderable="true">
+	<name>Shopform</name>
+	<author>Bixie</author>
+	<creationDate>May 2013</creationDate>
+	<copyright>Copyright (C) Bixie</copyright>
+	<authorEmail>info@bixie.nl</authorEmail>
+	<authorUrl>http://www.bixie.nl</authorUrl>
+	<version>2.5.0</version>
+	<description>Productformulier</description>
+</element>

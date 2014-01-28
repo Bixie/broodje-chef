@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="checkbox" group="Shop" orderable="true">
+	<name>Shopaantal</name>
+	<author>Bixie</author>
+	<creationDate>May 2013</creationDate>
+	<copyright>Copyright (C) Bixie</copyright>
+	<authorEmail>info@bixie.nl</authorEmail>
+	<authorUrl>http://www.bixie.nl</authorUrl>
+	<version>2.5.0</version>
+	<description>Productaantal selectors</description>
+	<params>
+	</params>
+	<params group="render">
+		<param name="show_buttons" type="radio" default="1" label="Buttons" description="Show/Hide plus-minus buttons">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+		<param name="show_label" type="radio" default="0" label="Label" description="Show/Hide label">
+			<option value="0">Hide</option>
+			<option value="1">Show</option>
+		</param>
+	</params>
+</element>

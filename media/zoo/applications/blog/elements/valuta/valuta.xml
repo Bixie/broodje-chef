@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<element type="valuta" group="Shop" orderable="true">
+    <name>Valuta</name>
+    <author>Matthijs Alles</author>
+    <creationDate>may 2011</creationDate>
+    <copyright>(c)Bixie.org</copyright>
+    <authorEmail>matthijs @ bixie.nl</authorEmail>
+    <authorUrl>http://www.bixie.org</authorUrl>
+    <version>1.0.0</version>
+    <description>Weergave van valuta</description>
+    <params>
+        <param name="name" type="text" default="" label="Name" description="Name used in item editor" />
+        <param name="description" type="text" default="" label="Description" description="Description tooltip used in item editor" />
+		<param name="access" type="zooaccesslevel" default="" label="Access Level" description="DETAILACCESS" />
+        <param name="formvaluta" type="text" default="€" label="Weergave valuta" description="Het valuta symbool dat weergegeven moet worden in het formulier." />
+    </params>
+    <params group="render">
+        <param name="showlabel" type="radio" default="0" label="Show Label" description="Show/Hide element label">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param>
+        <param name="altlabel" type="text" default="" label="Alternative Label" description="Possibility to override the default element label for this element rendering in this template position. Normally keep this field blank." />
+		<param name="class_suffix" type="text" default="" label="Class suffix" description="Suffix van class" />
+        <param name="valuta" type="text" default="€" label="Weergave valuta" description="Het valuta symbool dat weergegeven moet worden." />
+    </params>
+	<params group="submission">
+		<param name="altlabel" type="text" default="" label="Alternative Label" description="CUSTOM_LABEL" />
+		<param name="required" type="radio" default="0" label="Required" description="Required Field">
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</param>
+	</params>
+</element>
