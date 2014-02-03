@@ -29,6 +29,9 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 ?>
 
 <div class="formHolder">
+	<div class="bezorginfoHolder">
+		<div id="bezorginfo"></div>
+	</div>
 	<div class="grid-block width100">
 		<div class="grid-box width33 userForm adresbox">
 			<h3>Adresgegevens</h3>
@@ -100,9 +103,6 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 			<button type="submit" class="betalen">Bevestig bestelling</button>
 			
 		</div>
-	</div>
-	<div class="bezorginfoHolder">
-		<div id="bezorginfo"></div>
 	</div>
 	<div class="hidden">
 		<select name="verzgebied" id="verzgebied" class="inputbox required" size="1">
