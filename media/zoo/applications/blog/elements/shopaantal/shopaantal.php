@@ -54,7 +54,9 @@ class ElementShopaantal extends ElementOption {
 				} else {
 					$title = $option['name'].'. '.$title;
 				}
-				$html[]  = '<div class="select"><input id="shopaantal-'.$this->_item->id.$option['value'].'" type="text" class="shopaantal" size="5" title="'.$title.'" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="0" />';
+				$html[]  = '<div class="select"><input id="shopaantal-'.$this->_item->id.$option['value'].'" type="text" 
+								onfocus="if (this.value==\'0\')this.value=\'\'" onblur="if (this.value==\'\')this.value=\'0\'"
+								class="shopaantal" size="5" title="'.$title.'" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="0" />';
 				if ($params->get('show_buttons',0)) {
 					$html[]  = '<div class="plminbuttons">';
 					$html[]  = '<button type="button" class="butt plus" onclick="document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()+1));bixZooShop.calculate()">+</button>';
