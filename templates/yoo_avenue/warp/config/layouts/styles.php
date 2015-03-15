@@ -13,7 +13,7 @@ $data['config']  = $this['path']->url('less:customizer.json');
 $data['styles']  = array('default' => '');
 
 // init default
-if ($default = $this['path']->path('theme:less/style.less')) {
+if ($default = $this['path']->path('less:style.less')) {
 	$data['styles']['default'] = file_get_contents($default);
 }
 

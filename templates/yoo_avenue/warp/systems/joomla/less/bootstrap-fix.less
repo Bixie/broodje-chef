@@ -1,4 +1,4 @@
-/* Copyright (C) YOOtheme GmbH, http://www.gnu.org/licenses/gpl.html GNU/GPL */
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
 
 /* ========================================================================
    Name:            Bootstrap fix
@@ -11,9 +11,10 @@
 body {
     padding-left: 0;
     padding-right: 0;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
 }
-
-.nav { margin-top: 0; }
 
 ul.inline, ol.inline,
 ul.unstyled, ol.unstyled,
@@ -21,36 +22,9 @@ ul.unstyled, ol.unstyled,
 .nav:not(.nav-list),
 .pager, .pagination ul { padding-left: 0; }
 
-.btn-group input,
-.btn-group select { font-size: @global-font-size; }
-
-button,
-input,
-textarea {
-    -moz-box-sizing: content-box !important;
-    -webkit-box-sizing: content-box !important;
-    box-sizing: content-box !important;
-}
-
 
 /* Fixes UIkit defacement caused by Bootstrap
  ========================================================================== */
-
-/*
- * Re-fix
- */
-
-.uk-form button,
-.uk-form input,
-.uk-form textarea,
-.uk-search button,
-.uk-search input,
-.uk-button,
-.uk-alert-close {
-    -moz-box-sizing: border-box !important;
-    -webkit-box-sizing: border-box !important;
-    box-sizing: border-box !important;
-}
 
 /*
  * Base
@@ -88,6 +62,8 @@ pre code {
     padding: 0;
 }
 
+iframe { max-width: none; }
+
 /*
  * Form
  */
@@ -97,6 +73,10 @@ pre code {
 .uk-form label {
     display: inline-block;
     margin: 0;
+    line-height: @global-line-height;
+    font-family: @base-body-font-family;
+    font-size: @global-font-size;
+    font-weight: normal;
 }
 
 .uk-form legend {
@@ -105,19 +85,7 @@ pre code {
     color: inherit;
 }
 
-.uk-form label,
-.uk-form input,
-.uk-form select,
-.uk-form textarea {
-    line-height: @global-line-height;
-    font-family: @base-body-font-family;
-    font-size: @global-font-size;
-    font-weight: normal;
-}
-
-.uk-form textarea { line-height: normal; }
-
-.uk-form input:not([class*='uk-form-width-']):not([class*='uk-width-']),
+.uk-form input:not([class*='uk-form-width-']):not([class*='uk-width-']):not([type="radio"]):not([type="checkbox"]),
 .uk-form select:not([class*='uk-form-width-']):not([class*='uk-width-']),
 .uk-form textarea:not([class*='uk-form-width-']):not([class*='uk-width-']) { width: auto; }
 
@@ -151,23 +119,37 @@ pre code {
 .uk-form input[type="file"] { height: auto; }
 
 .uk-form input[type="radio"],
-.uk-form input[type="checkbox"] {
-    margin: 0;
-    vertical-align: baseline;
-}
+.uk-form input[type="checkbox"] { vertical-align: baseline; }
 
-.uk-form input[disabled],
-.uk-form input[readonly] { background: none; }
+/*
+ * Utility
+ */
 
-.uk-form .uk-form-small { font-size: @form-small-font-size; }
-.uk-form .uk-form-large { font-size: @form-large-font-size; }
+.uk-link-reset:focus,
+.uk-link-reset a:focus { text-decoration: none; }
 
 /*
  * Search
+ * Define defaults because search is an addon and may not been loaded by the theme
  */
+
+@search-width:                                  120px;
+@search-height:                                 30px;
+@search-padding:                                30px;
+@search-border:                                 rgba(0,0,0,0);
+@search-border-width:                           1px;
+@search-background:                             rgba(0,0,0,0);
+@search-color:                                  #444;
+@offcanvas-search-background:                   #1a1a1a;
+@offcanvas-search-border:                       rgba(0,0,0,0);
+@offcanvas-search-color:                        #ccc;
+.hook-search-field() {}
+.hook-search-field-focus() {}
+.hook-offcanvas-search-field() {}
 
 input.uk-search-field {
     /* Reset */
+    -webkit-appearance: none;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0;
@@ -178,8 +160,8 @@ input.uk-search-field {
     /* Override */
     width: @search-width;
     height: @search-height;
-    padding: 0 @search-padding;
-    border: 1px solid @search-border;
+    padding: 0 0 0 @search-padding;
+    border: @search-border-width solid @search-border;
     background: @search-background;
     color: @search-color;
     -webkit-transition: all linear 0.2s;
@@ -190,7 +172,7 @@ input.uk-search-field {
 
 input.uk-search-field:focus {
     /* Reset */
-    border: 1px solid @search-border;
+    border: @search-border-width solid @search-border;
     background: @search-background;
     box-shadow: none;
     /* Override */

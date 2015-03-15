@@ -23,7 +23,8 @@ return array(
         ),
 
         'files' => array(
-            '/css/theme.css' => 'less:theme.less'
+            '/css/theme.css'     => 'less:theme.less',
+            '/css/bootstrap.css' => 'less:bootstrap.less'
         )
 
     ),

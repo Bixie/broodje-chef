@@ -70,10 +70,10 @@ class Navbar
 
             // get width
             $width = (int) $li->attr('data-menu-columnwidth');
-            $style = $width > 0 ? sprintf(' style="width:%spx;"', $columns * $width) : null;
+            $style = $width > 0 ? sprintf(' style="min-width: %spx; max-width: %spx; width:%spx;"', $columns * $width, $columns * $width, $width) : null;
 
             // append dropdown divs
-            $li->append(sprintf('<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-width-%d"%s><div class="uk-grid"></div></div>', $columns, $style));
+            $li->append(sprintf('<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-width-%d"%s><div class="uk-grid uk-dropdown-grid"></div></div>', $columns, $style));
             $div = $li->first('div.uk-dropdown div.uk-grid');
 
             foreach ($li->children('ul') as $i => $u) {

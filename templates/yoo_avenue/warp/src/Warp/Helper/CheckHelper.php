@@ -57,7 +57,7 @@ class CheckHelper extends AbstractHelper
         $current  = phpversion();
         $required = '5.3.3';
 
-        if (version_compare($required, $current, '>=')) {
+        if (version_compare($required, $current, '>')) {
            $this->issues['critical'][] = "<a href=\"http://php.net\">PHP</a> version {$current} is too old. Make sure to install {$required} or newer.";
         }
 

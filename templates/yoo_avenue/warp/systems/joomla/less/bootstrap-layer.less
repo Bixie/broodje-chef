@@ -1,4 +1,4 @@
-/* Copyright (C) YOOtheme GmbH, http://www.gnu.org/licenses/gpl.html GNU/GPL */
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
 
 /* ========================================================================
    Name:            Bootstrap layer
@@ -154,7 +154,6 @@
     /* Reset */
     margin-bottom: 0;
     /* Overrides */
-    margin-top: (@bs-button-height - 4px) / 2; /* 4px = caret height */
     border-top-color: @button-color;
 }
 
@@ -163,6 +162,13 @@
 .btn [class*=" icon-"] {
     margin-top: (@bs-button-height - 14px) / 2; /* 14px = icon height */
     vertical-align: top;
+}
+
+.caret {
+    /* Reset */
+    margin-top: 0 !important;
+    /* Override */
+    vertical-align: middle !important;
 }
 
 
@@ -336,7 +342,19 @@ input.search-query { border-radius: @baseBorderRadius; }
     border: none;
     box-shadow: none;
     /* Overrides */
+    margin-top: @dropdown-margin-top;
+    padding: @dropdown-padding;
+    background: @dropdown-background;
     .hook-dropdown;
+}
+
+.dropdown-menu > li > a {
+    /* Reset */
+    font-weight: inherit;
+    line-height: inherit;
+    /* Overrides */
+    color: @nav-side-color;
+    padding: @nav-padding-vertical @nav-padding-horizontal;
 }
 
 .dropdown-menu > li > a:hover,
@@ -364,7 +382,7 @@ input.search-query { border-radius: @baseBorderRadius; }
     border-radius: 0;
     box-shadow: none;
     /* Overrides */
-    padding: @panel-box-padding;
+    padding: @panel-box-padding !important;
     background: @panel-box-background;
     .hook-panel-box;
 }
@@ -431,14 +449,25 @@ input.search-query { border-radius: @baseBorderRadius; }
     /* Reset */
     text-shadow: none;
     /* Overrides */
+    padding: 0 @badge-padding-horizontal;
     background: @badge-background;
     font-size: @badge-font-size;
     line-height: @badge-line-height;
     color: @badge-color;
     text-align: center;
-    font-weight: bold;
+    font-weight: @badge-font-weight;
     vertical-align: middle;
     .hook-badge;
+}
+
+.badge {
+    /* Overrides */
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: @badge-notification-line-height;
+    border-radius: 500px;
+    font-size: @badge-notification-font-size;
+    line-height: @badge-notification-line-height;
 }
 
 .label,
@@ -522,8 +551,16 @@ input.search-query { border-radius: @baseBorderRadius; }
 /* Navs overrides
  ========================================================================== */
 
+.nav > li > a {
+    color: @subnav-color;
+    .hook-subnav;
+}
+
 .nav > li > a:hover,
-.nav > li > a:focus { background-color: @nav-side-hover-background; }
+.nav > li > a:focus {
+    color: @subnav-hover-color;
+    .hook-subnav-hover;
+}
 
 .nav-header {
     text-shadow: none;
@@ -534,8 +571,21 @@ input.search-query { border-radius: @baseBorderRadius; }
  * List
  */
 
-.nav-list > li > a,
-.nav-list .nav-header { text-shadow: none; }
+.nav-list > li > a {
+    /* Reset */
+    text-shadow: none;
+    /* Override */
+    color: @nav-side-color;
+    .hook-nav-side;
+}
+
+.nav-list .nav-header {
+    /* Reset */
+    text-shadow: none;
+    /* Override */
+    color: @nav-side-header-color;
+    .hook-nav-side-header;
+}
 
 .nav-list > li > a:hover,
 .nav-list > li > a:focus {
@@ -562,11 +612,19 @@ input.search-query { border-radius: @baseBorderRadius; }
  */
 
 .nav-pills > li > a {
+    /* Reset */
     border-radius: 0;
+    line-height: inherit;
+    /* Override */
+    padding: @subnav-pill-padding-vertical @subnav-pill-padding-horizontal;
     .hook-subnav-pill;
 }
 
-.nav-pills > li > a:hover { .hook-subnav-pill-hover; };
+.nav-pills > li > a:hover {
+    background: @subnav-pill-hover-background;
+    color: @subnav-pill-hover-color;
+    .hook-subnav-pill-hover;
+}
 
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover,
@@ -576,6 +634,31 @@ input.search-query { border-radius: @baseBorderRadius; }
     color: @subnav-pill-active-color;
     .hook-subnav-pill-active;
 }
+
+.nav-pills li.dropdown a:hover .caret,
+.nav-pills li.dropdown a:focus .caret {
+    border-top-color: @subnav-pill-hover-color;
+    border-bottom-color: @subnav-pill-hover-color;
+}
+
+/* Open dropdowns */
+.nav-pills li.dropdown.open .caret,
+.nav-pills li.dropdown.open.active .caret,
+.nav-pills li.dropdown.open a:hover .caret,
+.nav-pills li.dropdown.open a:focus .caret {
+    border-top-color: @subnav-pill-hover-color;
+    border-bottom-color: @subnav-pill-hover-color;
+}
+
+.nav-pills .open .dropdown-toggle {
+    background: @subnav-pill-hover-background;
+    color: @subnav-pill-hover-color;
+    .hook-subnav-pill-hover;
+}
+
+.nav-pills .dropdown-menu { border-radius: @baseBorderRadius; }
+
+.nav-pills .dropdown-toggle .caret { margin-left: 5px; }
 
 /*
  * Tabs Stacked
@@ -595,20 +678,17 @@ input.search-query { border-radius: @baseBorderRadius; }
 }
 
 /*
- * Dropdowns
- */
-
-.nav-tabs .dropdown-menu { border-radius: 0 0 @baseBorderRadius @baseBorderRadius; }
-.nav-pills .dropdown-menu { border-radius: @baseBorderRadius; }
-
-/*
  * Tabs
  */
 
 .nav-tabs { border-bottom: 1px solid @tab-border; }
 
 .nav-tabs > li > a {
+
     border-radius: @baseBorderRadius @baseBorderRadius 0 0;
+    /* Overrides */
+    padding: @tab-padding-top @tab-padding-horizontal @tab-padding-bottom @tab-padding-horizontal;
+
     &:hover {
         border-color: @tab-hover-border;
         border-bottom-color: @tab-border;
@@ -616,6 +696,7 @@ input.search-query { border-radius: @baseBorderRadius; }
         color: @tab-hover-color;
         .hook-tab-hover;
     }
+
 }
 
 .nav-tabs > .active > a,
@@ -630,11 +711,14 @@ input.search-query { border-radius: @baseBorderRadius; }
 
 .tabs-below > .nav-tabs { border-top: 1px solid @tab-border; }
 .tabs-below > .nav-tabs > li > a {
+
     border-radius: 0 0 @baseBorderRadius @baseBorderRadius;
+
     &:hover {
         border-color: @tab-hover-border;
         border-top-color: @tab-border;
     }
+
 }
 
 .tabs-below > .nav-tabs > .active > a,
@@ -643,11 +727,14 @@ input.search-query { border-radius: @baseBorderRadius; }
 
 .tabs-left > .nav-tabs { border-right: 1px solid @tab-border; }
 .tabs-left > .nav-tabs > li > a {
+
     border-radius: @baseBorderRadius 0 0 @baseBorderRadius;
+
     &:hover {
         border-color: @tab-hover-border;
         border-right-color: @tab-border;
     }
+
 }
 
 .tabs-left > .nav-tabs .active > a,
@@ -656,16 +743,44 @@ input.search-query { border-radius: @baseBorderRadius; }
 
 .tabs-right > .nav-tabs { border-left: 1px solid @tab-border; }
 .tabs-right > .nav-tabs > li > a {
+
     border-radius: 0 @baseBorderRadius @baseBorderRadius 0;
+
     &:hover {
         border-color: @tab-hover-border;
         border-left-color: @tab-border;
     }
+
 }
 
 .tabs-right > .nav-tabs .active > a,
 .tabs-right > .nav-tabs .active > a:hover,
 .tabs-right > .nav-tabs .active > a:focus { border-color: @tab-border @tab-border @tab-border transparent; }
+
+/*
+ * Dropdowns
+ */
+
+.nav-tabs .dropdown-menu { border-radius: 0 0 @baseBorderRadius @baseBorderRadius; }
+
+/* Open dropdowns */
+.nav-tabs .open .dropdown-toggle {
+    /* Overrides */
+    border-color: @tab-hover-border;
+    background: @tab-hover-background;
+    color: @tab-hover-color;
+    .hook-tab-hover;
+}
+
+.nav-tabs li.dropdown.open .caret,
+.nav-tabs li.dropdown.open.active .caret,
+.nav-tabs li.dropdown.open a:hover .caret,
+.nav-tabs li.dropdown.open a:focus .caret {
+    border-top-color: @tab-hover-color;
+    border-bottom-color: @tab-hover-color;
+}
+
+.nav-tabs .dropdown-toggle .caret { margin-left: 5px; }
 
 
 /* Breadcrumb overrides

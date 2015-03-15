@@ -31,7 +31,7 @@ class Pre
 		}
 
 		// init vars
-		$menu   = \JFactory::getApplication()->getMenu();
+		$menu = \JFactory::getApplication()->getMenu();
 
         // get warp config
         $config = $warp['config'];
@@ -41,7 +41,7 @@ class Pre
 			$item = null;
 
 			// get menu item
-			if (preg_match('/item-(\d+)/', $li->attr(version_compare(JVERSION, '1.7.0', '>=') ? 'class' : 'id'), $matches)) {
+			if (preg_match('/item-(\d+)/', $li->attr('class'), $matches)) {
 				$item = $menu->getItem($matches[1]);
 			}
 
@@ -82,10 +82,14 @@ class Pre
 
 			if($span = $li->first("span:first")) {
 
+				$type = false;
+
+				if($span->hasClass("nav-header")) $type = "header";
 				if($span->hasClass("separator")) {
+					$type = $span->text()=="-" ? "separator" : "header";
+				}
 
-					$type = $type = $span->text()=="-" ? "separator" : "header";
-
+				if($type) {
 					$span->replaceWith('<a href="#" data-type="'.$type.'">'.$span->text().'</a>');
 				}
 			}

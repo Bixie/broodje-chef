@@ -107,9 +107,13 @@ class SystemHelper extends AbstractHelper
     public function init()
     {
         // set paths
-        $this['path']->register($this->path, 'site');
-        $this['path']->register($this->path . '/administrator', 'admin');
-        $this['path']->register($this->path . '/cache/template', 'cache');
+        $this['path']
+            ->register($this->path, 'site')
+            ->register($this->path . '/administrator', 'admin')
+            ->register($this->path . '/cache/template', 'cache');
+
+        // set theme support
+        \JFactory::getConfig()->set('widgetkit', true);
 
         // set translations
         $this->language->load('tpl_warp', $this['path']->path('warp:systems/joomla'), null, true);
@@ -129,6 +133,9 @@ class SystemHelper extends AbstractHelper
         // get application
         $app = $this->application;
 
+        // get user
+        $user = \JFactory::getUser();
+
         // set config
         $this['config']['language']    = $this->document->language;
         $this['config']['direction']   = $this->document->direction;
@@ -137,6 +144,12 @@ class SystemHelper extends AbstractHelper
         $this['config']['datetime']    = \JHTML::_('date', 'now', 'Y-m-d');
         $this['config']['actual_date'] = \JHTML::_('date', 'now', \JText::_('DATE_FORMAT_LC'));
         $this['config']['page_class']  = $app->getParams()->get('pageclass_sfx');
+
+        // frontentediting
+        $frontediting = $app->get('frontediting', 1);
+
+        $this['config']['frontediting'] = $frontediting && $user->id && $user->authorise('core.edit', 'com_modules');
+        $this['config']['frontendMenuEditing'] = ($frontediting == 2) && $user->authorise('core.edit', 'com_menus');
 
         // branding ?
         if ($this['config']->get('warp_branding', true)) {
@@ -349,6 +362,12 @@ class SystemHelper extends AbstractHelper
     {
         // get application
         $app = $this->application;
+
+        if ($app->input->get('option') == 'com_tags') {
+            if (in_array($app->input->get('view'), array('tag'))) {
+                return true;
+            }
+        }
 
         if ($app->input->get('option') == 'com_content') {
             if (in_array($app->input->get('view'), array('frontpage', 'article', 'archive', 'featured')) || ($app->input->get('view') == 'category' && $app->input->get('layout') == 'blog')) {

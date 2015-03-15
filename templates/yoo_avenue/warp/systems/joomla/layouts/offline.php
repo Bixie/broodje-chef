@@ -12,6 +12,9 @@ $app = JFactory::getApplication();
 // add css
 $this['asset']->addFile('css', 'css:theme.css');
 
+require_once JPATH_ADMINISTRATOR . '/components/com_users/helpers/users.php';
+$twofactormethods = UsersHelper::getTwoFactorMethods();
+
 ?>
 
 <!DOCTYPE HTML>
@@ -24,6 +27,8 @@ $this['asset']->addFile('css', 'css:theme.css');
 <body class="uk-height-1-1 uk-vertical-align uk-text-center">
 
 	<div class="tm-offline uk-panel uk-panel-box uk-vertical-align-middle uk-container-center">
+
+		<jdoc:include type="message" />
 
 		<h1><?php echo $error; ?></h1>
 
@@ -49,8 +54,14 @@ $this['asset']->addFile('css', 'css:theme.css');
 				<input class="uk-width-1-1" type="password" name="password" placeholder="<?php echo JText::_('JGLOBAL_PASSWORD') ?>">
 			</div>
 
+			<?php if (count($twofactormethods) > 1) : ?>
 			<div class="uk-form-row">
-				<input class="uk-button uk-button-primary uk-width-1-1" type="submit" name="Submit" value="<?php echo JText::_('JLOGIN') ?>">
+				<input class="uk-width-1-1" type="text" name="secretkey" tabindex="0" size="18" placeholder="<?php echo JText::_('JGLOBAL_SECRETKEY') ?>" />
+			</div>
+			<?php endif; ?>
+
+			<div class="uk-form-row">
+				<button class="uk-button uk-button-primary uk-width-1-1" type="submit" name="Submit"><?php echo JText::_('JLOGIN') ?></button>
 			</div>
 
 			<div class="uk-form-row">

@@ -18,15 +18,17 @@ if ($this['system']->document->getType() == 'html') {
 	$this['system']->document->setHeadData($head);
 }
 
-// load jQuery, if not loaded before
-if (!$this['system']->application->get('jquery')) {
-	$this['system']->application->set('jquery', true);
-	$this['system']->document->addScript($this['path']->url('warp:vendor/jquery/jquery.js'));
-}
+// load jQuery
+JHtml::_('jquery.framework');
 
 // get styles and scripts
 $styles  = $this['asset']->get('css');
 $scripts = $this['asset']->get('js');
+
+// load bootstrap styles
+if ($this['config']->get('bootstrap', true) && $file = $this['path']->url('css:bootstrap.css')) {
+	$styles->prepend($bootstrap = $this['asset']->createFile($file));
+}
 
 // customizer mode
 if ($this['config']['customizer']) {
@@ -71,7 +73,7 @@ else if ($this['config']['dev_mode']) {
     $this['asset']->addString('js', 'var less = { env: "development" }, files = '.json_encode($files).';');
     $this['asset']->addFile('js', 'warp:vendor/jquery/jquery-less.js');
     $this['asset']->addFile('js', 'warp:vendor/jquery/jquery-rtl.js');
-    $this['asset']->addFile('js', 'warp:vendor/less/less.js');
+    $this['asset']->addFile('js', 'warp:vendor/less/less-1.5.1.min.js');
     $this['asset']->addFile('js', 'warp:js/developer.js');
 }
 // compress styles and scripts
@@ -96,17 +98,29 @@ else if ($compression = $this['config']['compression'] or $this['config']['direc
 
 	// cache styles and check for remote styles
 	if ($styles) {
+
+		if (isset($bootstrap)) {
+			$styles->remove($bootstrap);
+		}
+
 		$styles = array($this['asset']->cache('theme.css', $styles, array_merge($filters, array('CssCompressor')), $options));
+
 		foreach ($styles[0] as $style) {
 			if ($style->getType() == 'File' && !$style->getPath()) {
 				$styles[] = $style;
 			}
 		}
+
+		if (isset($bootstrap)) {
+			array_unshift($styles, $this['asset']->cache('bootstrap.css', $bootstrap, array_merge($filters, array('CssCompressor')), $options));
+		}
 	}
 
 	// cache scripts and check for remote scripts
 	if ($scripts) {
+
 		$scripts = array($this['asset']->cache('theme.js', $scripts, array('JsCompressor'), $options));
+
 		foreach ($scripts[0] as $script) {
 			if ($script->getType() == 'File' && !$script->getPath()) {
 				$scripts[] = $script;

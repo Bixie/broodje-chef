@@ -9,12 +9,12 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
 ?>
 
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
-<h1 class="uk-h3"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
+<div class="page-header"><h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1></div>
 <?php endif; ?>
 
 <?php

@@ -23,13 +23,13 @@ $canEdit	= $params->get('access-edit');
 $user		= JFactory::getUser();
 
 if ($this->params->get('show_page_heading')) {
-	echo '<h1 class="uk-h3">'.$this->escape($this->params->get('page_heading')).'</h1>';
+	echo '<h1>'.$this->escape($this->params->get('page_heading')).'</h1>';
 }
 
 // template args
 $args = array(
 	'permalink' => ($view != 'article') ? JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catslug), true, -1) : '',
-	'image' => isset($images->image_fulltext) && !empty($images->image_fulltext) && $params->get('access-view') ? htmlspecialchars($images->image_fulltext) : '',
+	'image' => isset($images->image_fulltext) && $params->get('access-view') ? htmlspecialchars($images->image_fulltext) : '',
 	'image_alignment' => !isset($images->float_fulltext) || empty($images->float_fulltext) ? htmlspecialchars($params->get('float_fulltext')) : htmlspecialchars($images->float_fulltext),
 	'image_alt' => isset($images->image_fulltext_alt) ? htmlspecialchars($images->image_fulltext_alt) : '',
 	'image_caption' => isset($images->image_fulltext_caption) ? htmlspecialchars($images->image_fulltext_caption) : '',

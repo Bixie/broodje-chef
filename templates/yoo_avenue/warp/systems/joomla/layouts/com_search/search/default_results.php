@@ -9,31 +9,37 @@
 // no direct access
 defined('_JEXEC') or die;
 
-?>
+foreach ($this->results as $result) {
 
-<div class="uk-margin">
+	$args = array(
+        'permalink' => '',
+        'image' => '',
+        'image_alignment' => '',
+        'image_alt' => '',
+        'image_caption' => '',
+        'title' => $this->escape($result->title),
+        'title_link' => '1',
+        'author' => '',
+        'author_url' => '',
+        'date' => '',
+        'datetime' => '',
+        'category' => ($result->section) ? $this->escape($result->section) : '',
+        'category_url' => '',
+        'hook_aftertitle' => '',
+        'hook_beforearticle' => '',
+        'hook_afterarticle' => '',
+        'article' => $result->text,
+        'tags' => '',
+        'edit' => '',
+        'url' => ($result->href) ? JRoute::_($result->href) : '',
+        'more' => '',
+        'previous' => '',
+        'next' => ''
+    );
 
-	<?php foreach ($this->results as $result) : ?>
-	<article class="uk-article">
-		
-		<?php if ( $result->href ) : ?>
-		<h1 class="uk-article-title"><a href="<?php echo JRoute::_($result->href); ?>" <?php if ($result->browsernav == 1 ) echo 'target="_blank"'; ?>><?php  echo $this->escape($result->title); ?></a></h1>
-		<?php else : ?>
-		<h1 class="uk-h3"><?php echo $this->escape($result->title); ?></h1>
-		<?php endif; ?>
+	// Render template
+	echo $warp['template']->render('article', $args);
 
-		<?php if ($result->section && $this->params->get('show_date')) : ?>
-		<p class="uk-article-meta">
-			<?php if ($this->params->get('show_date')) echo JText::sprintf('JGLOBAL_CREATED_DATE_ON', $result->created).'. '; ?>
-			<?php if ($result->section) echo JText::_('TPL_WARP_POSTED_IN').' '.$this->escape($result->section); ?>
-		</p>
-		<?php endif; ?>
-		
-		<?php echo $result->text; ?>
+}
 
-	</article>
-	<?php endforeach; ?>
-
-</div>
-
-<?php echo $this->pagination->getPagesLinks();
+echo $this->pagination->getPagesLinks();

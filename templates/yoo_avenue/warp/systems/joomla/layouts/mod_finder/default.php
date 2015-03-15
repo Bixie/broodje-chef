@@ -13,6 +13,5 @@ global $warp;
 
 <form id="search-<?php echo $module->id; ?>" class="uk-search" action="<?php echo JRoute::_($route); ?>" method="get" role="search">
 	<input class="uk-search-field" type="search" name="q" placeholder="<?php echo JText::_('TPL_WARP_SEARCH'); ?>" autocomplete="off">
-	<button class="uk-search-close" type="reset"></button>
-	<?php echo modFinderHelper::getGetFields($route); ?>
+	<?php echo modFinderHelper::getGetFields($route, (int) $params->get('set_itemid')); ?>
 </form>

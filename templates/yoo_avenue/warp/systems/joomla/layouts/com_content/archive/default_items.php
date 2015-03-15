@@ -23,7 +23,7 @@ foreach ($this->items as $item) {
 		'image_caption' => '',
 		'title' => $this->escape($item->title),
 		'title_link' => $params->get('link_titles'),
-		'author' => $item->created_by_alias ? $item->created_by_alias : $item->author,
+		'author' => $params->get('show_author') ? ($item->created_by_alias ? $item->created_by_alias : $item->author) : '',
 		'author_url' => !empty($item->contactid) && $params->get('link_author') == true ? JRoute::_('index.php?option=com_contact&view=contact&id='.$item->contactid) : '',
 		'date' => $params->get('show_create_date') ? $item->created : '',
 		'datetime' => substr($item->created, 0, 10),

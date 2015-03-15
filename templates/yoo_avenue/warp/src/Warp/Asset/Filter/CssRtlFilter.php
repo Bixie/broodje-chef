@@ -54,7 +54,107 @@ class CssRtlFilter implements FilterInterface
         'background-position' => 'bgPosition',
         'box-shadow' => 'boxShadow',
         'background' => 'background',
-        'background-image' => 'backgroundImage'
+        'background-image' => 'backgroundImage',
+        'transform' => 'transform',
+        '-ms-transform' => 'transform',
+        '-webkit-transform' => 'transform',
+        'content' => 'icons'
+    );
+
+    public static $iconMap = array(
+        "\\f04e" => "\\f04a",
+        "\\f04a" => "\\f04e",
+
+        // .uk-icon-fast-forward
+        // .uk-icon-fast-backward
+        "\\f050" => "\\f049",
+        "\\f049" => "\\f050",
+
+        // .uk-icon-step-forward
+        // .uk-icon-step-backward
+        "\\f051" => "\\f048",
+        "\\f048" => "\\f051",
+
+        // .uk-icon-mail-forward
+        // .uk-icon-share
+        // .uk-icon-mail-reply
+        // .uk-icon-reply
+        "\\f064" => "\\f112",
+        "\\f112" => "\\f064",
+
+        // .uk-icon-rotate-left
+        // .uk-icon-undo
+        // .uk-icon-rotate-right
+        // .uk-icon-repeat
+        "\\f0e2" => "\\f01e",
+        "\\f01e" => "\\f0e2",
+
+        // .uk-icon-align-left
+        // .uk-icon-align-right
+        "\\f036" => "\\f038",
+        "\\f038" => "\\f036",
+
+        // .uk-icon-chevron-left
+        // .uk-icon-chevron-right
+        "\\f053" => "\\f054",
+        "\\f054" => "\\f053",
+
+        // .uk-icon-arrow-left
+        // .uk-icon-arrow-right
+        "\\f060" => "\\f061",
+        "\\f061" => "\\f060",
+
+        // .uk-icon-hand-o-left
+        // .uk-icon-hand-o-right
+        "\\f0a5" => "\\f0a4",
+        "\\f0a4" => "\\f0a5",
+
+        // .uk-icon-arrow-circle-left
+        // .uk-icon-arrow-circle-right
+        "\\f0a8" => "\\f0a9",
+        "\\f0a9" => "\\f0a8",
+
+        // .uk-icon-caret-left
+        // .uk-icon-caret-right
+        "\\f0d9" => "\\f0da",
+        "\\f0da" => "\\f0d9",
+
+        // .uk-icon-angle-double-left
+        // .uk-icon-angle-double-right
+        "\\f100" => "\\f101",
+        "\\f101" => "\\f100",
+
+        // .uk-icon-angle-left
+        // .uk-icon-angle-right
+        "\\f104" => "\\f105",
+        "\\f105" => "\\f104",
+
+        // .uk-icon-quote-left
+        // .uk-icon-quote-right
+        "\\f10d" => "\\f10e",
+        "\\f10e" => "\\f10d",
+
+        // .uk-icon-chevron-circle-left
+        // .uk-icon-chevron-circle-right
+        "\\f137" => "\\f138",
+        "\\f138" => "\\f137",
+
+        // .uk-icon-long-arrow-left
+        // .uk-icon-long-arrow-right
+        "\\f177" => "\\f178",
+        "\\f178" => "\\f177",
+
+        // .uk-icon-arrow-circle-o-left
+        // .uk-icon-arrow-circle-o-right
+        "\\f190" => "\\f18e",
+        "\\f18e" => "\\f190",
+
+        // .uk-icon-toggle-left
+        // .uk-icon-caret-square-o-left
+        // .uk-icon-toggle-right
+        // .uk-icon-caret-square-o-right
+        "\\f191" => "\\f152",
+        "\\f152" => "\\f191"
     );
 
 
@@ -77,6 +177,7 @@ class CssRtlFilter implements FilterInterface
      */
     public function process($css)
     {
+
         $css = trim($css); // give it a solid trimming to start
 
         $css = preg_replace('/\/\*[\s\S]+?\*\//', '', $css);      // comments
@@ -107,6 +208,22 @@ class CssRtlFilter implements FilterInterface
         }, $css);
 
         return $css;
+    }
+
+    public function icons($v) {
+        // skip if there is definitely no icon
+        if (strpos($v, "\\f") === false) {
+            return $v;
+        }
+
+        // check all possible icons
+        foreach ($this::$iconMap as $key => $replace) {
+            if(strpos($v, $key) !== false) {
+                return str_replace($key, $replace, $v);
+            }
+        }
+
+        return $v;
     }
 
     public function quad($v) {
@@ -227,10 +344,10 @@ class CssRtlFilter implements FilterInterface
     }
 
     public function background($v) {
-      // FIXME: split several background layers (divided by comma)
+      // TODO: split several background layers (divided by comma)
 
       $that = $this;
-      $parseSingle = function($v) use($that) {
+      $parseSingle = function($v) use ($that) {
         // background-image
         $method = function($val) use ($that) {
             $str = $val[0];
@@ -248,4 +365,36 @@ class CssRtlFilter implements FilterInterface
       $arr = $this->bracketCommaSplit($v);
       return implode(',', array_map($parseSingle, $arr));
     }
+
+
+    public function transform($val) {
+
+        $negateValue = function($valString) {
+            return ($valString[0] == "0" ? 0 : ($valString[0] == "-" ? substr($valString, 1) : "-".$valString));
+        };
+
+        // translate, translateX, translate3D
+        $translateRegex = '/(translate(X|x|3D|3d)?)\(([^,\)]+)([^\)]*)\)/';
+        $translateCallback = function($matches) use ($negateValue) {
+
+            $value = trim($matches[3]);
+            $remainder = $matches[4];
+            $res  = $matches[1].'('.$negateValue($value).($remainder ? $remainder : '').')';
+            return $res;
+        };
+        $val = preg_replace_callback($translateRegex, $translateCallback, $val);
+
+        // rotate
+        $rotateRegex = '/rotate\(\s*(\d+)\s*deg\s*\)/';
+        $rotateCallback = function($matches) {
+            $angle = (int)$matches[1];
+            $mirrored = 180 - $angle;
+            return 'rotate('.$mirrored.'deg)';
+        };
+        $val = preg_replace_callback($rotateRegex, $rotateCallback, $val);
+
+
+        return $val;
+    }
+
 }

@@ -48,6 +48,8 @@
                     {"name": "Alef", "value": "'Alef'", "url":"https://fonts.googleapis.com/css?family=Alef"},
                     {"name": "Alegreya", "value": "'Alegreya'", "url":"https://fonts.googleapis.com/css?family=Alegreya"},
                     {"name": "Alegreya SC", "value": "'Alegreya SC'", "url":"https://fonts.googleapis.com/css?family=Alegreya+SC"},
+                    {"name": "Alegreya Sans", "value": "'Alegreya Sans'", "url":"https://fonts.googleapis.com/css?family=Alegreya+Sans"},
+                    {"name": "Alegreya Sans SC", "value": "'Alegreya Sans SC'", "url":"https://fonts.googleapis.com/css?family=Alegreya+Sans+SC"},
                     {"name": "Alex Brush", "value": "'Alex Brush'", "url":"https://fonts.googleapis.com/css?family=Alex+Brush"},
                     {"name": "Alfa Slab One", "value": "'Alfa Slab One'", "url":"https://fonts.googleapis.com/css?family=Alfa+Slab+One"},
                     {"name": "Alice", "value": "'Alice'", "url":"https://fonts.googleapis.com/css?family=Alice"},
@@ -234,6 +236,7 @@
                     {"name": "Euphoria Script", "value": "'Euphoria Script'", "url":"https://fonts.googleapis.com/css?family=Euphoria+Script"},
                     {"name": "Ewert", "value": "'Ewert'", "url":"https://fonts.googleapis.com/css?family=Ewert"},
                     {"name": "Exo", "value": "'Exo'", "url":"https://fonts.googleapis.com/css?family=Exo"},
+                    {"name": "Exo 2", "value": "'Exo 2'", "url":"https://fonts.googleapis.com/css?family=Exo+2"},
                     {"name": "Expletus Sans", "value": "'Expletus Sans'", "url":"https://fonts.googleapis.com/css?family=Expletus+Sans"},
                     {"name": "Fanwood Text", "value": "'Fanwood Text'", "url":"https://fonts.googleapis.com/css?family=Fanwood+Text"},
                     {"name": "Fascinate", "value": "'Fascinate'", "url":"https://fonts.googleapis.com/css?family=Fascinate"},
@@ -340,9 +343,11 @@
                     {"name": "Just Another Hand", "value": "'Just Another Hand'", "url":"https://fonts.googleapis.com/css?family=Just+Another+Hand"},
                     {"name": "Just Me Again Down Here", "value": "'Just Me Again Down Here'", "url":"https://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here"},
                     {"name": "Kameron", "value": "'Kameron'", "url":"https://fonts.googleapis.com/css?family=Kameron"},
+                    {"name": "Kantumruy", "value": "'Kantumruy'", "url":"https://fonts.googleapis.com/css?family=Kantumruy"},
                     {"name": "Karla", "value": "'Karla'", "url":"https://fonts.googleapis.com/css?family=Karla"},
                     {"name": "Kaushan Script", "value": "'Kaushan Script'", "url":"https://fonts.googleapis.com/css?family=Kaushan+Script"},
                     {"name": "Kavoon", "value": "'Kavoon'", "url":"https://fonts.googleapis.com/css?family=Kavoon"},
+                    {"name": "Kdam Thmor", "value": "'Kdam Thmor'", "url":"https://fonts.googleapis.com/css?family=Kdam+Thmor"},
                     {"name": "Keania One", "value": "'Keania One'", "url":"https://fonts.googleapis.com/css?family=Keania+One"},
                     {"name": "Kelly Slab", "value": "'Kelly Slab'", "url":"https://fonts.googleapis.com/css?family=Kelly+Slab"},
                     {"name": "Kenia", "value": "'Kenia'", "url":"https://fonts.googleapis.com/css?family=Kenia"},
@@ -748,6 +753,14 @@
             ]
         },
         {
+            "label": "Theme",
+            "vars": [
+                "@theme-block-padding",
+                "@theme-block-background",
+                "@theme-footer-background"
+            ]
+        },
+        {
             "label": "Typography",
             "vars": [
                 "@global-color",
@@ -797,9 +810,9 @@
             "advanced": true,
             "vars": [
                 "@global-margin",
-                "@global-large-margin",
+                "@global-margin-large",
                 "@global-grid-gutter",
-                "@global-grid-large-gutter"
+                "@global-grid-gutter-large"
             ]
         },
         {
@@ -1027,6 +1040,34 @@
             "advanced": true,
             "vars": [
                 "@utility-*"
+            ]
+        },
+        {
+            "label": "Dotnav",
+            "advanced": true,
+            "vars": [
+                "@dotnav-*"
+            ]
+        },
+        {
+            "label": "Slidenav",
+            "advanced": true,
+            "vars": [
+                "@slidenav-*"
+            ]
+        },
+        {
+            "label": "Accordion",
+            "advanced": true,
+            "vars": [
+                "@accordion-*"
+            ]
+        },
+        {
+            "label": "Search",
+            "advanced": true,
+            "vars": [
+                "@search-*"
             ]
         }
     ]

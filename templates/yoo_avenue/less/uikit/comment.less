@@ -1,4 +1,4 @@
-/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
 
 //
 // Component: Comment
@@ -13,12 +13,12 @@
 
 @comment-avatar-margin-right:                           @global-margin;
 
-@comment-title-font-size:                               round(@global-font-size * 1.14);
-@comment-title-line-height:                             round(@comment-title-font-size * 1.37);
+@comment-title-font-size:                               round((@global-font-size * 1.14));
+@comment-title-line-height:                             round((@comment-title-font-size * 1.37));
 
 @comment-meta-color:                                    @global-muted-color;
-@comment-meta-font-size:                                round(@global-font-size * 0.78);
-@comment-meta-line-height:                              round(@comment-meta-font-size * 1.45);
+@comment-meta-font-size:                                round((@global-font-size * 0.78));
+@comment-meta-line-height:                              round((@comment-meta-font-size * 1.45));
 
 @comment-list-margin-top:                               @global-margin + 10px;
 
@@ -31,6 +31,12 @@
 @comment-background:                                    @global-light-background;
 
 @comment-primary-border:                        		@global-primary-background;
+
+
+// Component
+// ========================================================================
+
+.hook-comment() {}
 
 
 // Sub-object `uk-comment-header`
@@ -59,6 +65,17 @@
 // ========================================================================
 
 .hook-comment-meta() {}
+
+// Sub-object `uk-comment-body`
+// ========================================================================
+
+.hook-comment-body() {}
+
+
+// Sub-object `uk-comment-primary`
+// ========================================================================
+
+.hook-comment-primary() {}
 
 
 // Miscellaneous

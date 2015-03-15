@@ -1,4 +1,4 @@
-/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
 
 //
 // Component: Form
@@ -12,8 +12,8 @@
 @form-height:                               @global-height;
 @form-small-height:                         @global-small-height;
 @form-large-height:                         @global-large-height;
-@form-small-font-size:                      round(@global-font-size * 0.85);
-@form-large-font-size:                      round(@global-font-size * 1.14);
+@form-small-font-size:                      round((@global-font-size * 0.85));
+@form-large-font-size:                      round((@global-font-size * 1.14));
 
 @form-border:                               @global-border;
 @form-background:                           @global-light-background;
@@ -39,8 +39,8 @@
 @form-blank-border:                         @global-border;
 
 @form-legend-border:                        @global-border;
-@form-legend-font-size:                     round(@global-font-size * 1.28);
-@form-legend-line-height:                   round(@form-legend-font-size * 1.66);
+@form-legend-font-size:                     round((@global-font-size * 1.28));
+@form-legend-line-height:                   round((@form-legend-font-size * 1.66));
 
 @form-gutter:                               @global-margin;
 
@@ -62,6 +62,9 @@
 
 // Disabled state
 .hook-form-disabled() {}
+
+// Legend
+.hook-form-legend() {}
 
 
 // Validation states
@@ -85,6 +88,14 @@
 
 .hook-form-blank() {}
 .hook-form-blank-focus() {}
+
+
+// Sub-object: `uk-form-label`
+// ========================================================================
+
+.hook-form-stacked-label() {}
+
+.hook-form-horizontal-label() {}
 
 
 // Miscellaneous

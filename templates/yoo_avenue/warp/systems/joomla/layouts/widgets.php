@@ -15,6 +15,8 @@ $displays   = array_fill_keys(array('small', 'medium', 'large'), array());
 $responsive = $config->get("grid.{$position}.responsive", '') ?: 'small';
 $stacked    = array_diff($keys = array_keys($displays), array_slice($keys, array_search($responsive, $keys)));
 
+$user = \JFactory::getUser();
+
 foreach ($widgets as $index => $widget) {
 
 	// set widget params
@@ -35,6 +37,16 @@ foreach ($widgets as $index => $widget) {
 
 	// render widget
 	$output[] = $this->render('widget', compact('widget', 'params'));
+
+    if ($this['config']['frontediting'] && $user->authorise('core.edit', 'com_modules.module.' . $widget->id)) {
+
+        \JLayoutHelper::render('joomla.edit.frontediting_modules', array(
+            'moduleHtml'   => &$output[$index],
+            'module'       => $widget,
+            'position'     => $position,
+            'menusediting' => $this['config']['frontendMenuEditing']
+        ));
+    }
 
     foreach ($displays as $name => &$display) {
         if ($config->get("widgets.{$widget->id}.display.{$name}", true)) {

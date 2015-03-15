@@ -8,29 +8,37 @@
 
 defined('_JEXEC') or die;
 
-$mime = !empty($this->result->mime) ? 'mime-' . $this->result->mime : null;
-$base = JURI::getInstance()->toString(array('scheme', 'host', 'port'));
-
 if (!empty($this->query->highlight) && empty($this->result->mime) && $this->params->get('highlight_terms', 1) && JPluginHelper::isEnabled('system', 'highlight')) {
 	$route = $this->result->route . '&highlight=' . base64_encode(json_encode($this->query->highlight));
 } else {
 	$route = $this->result->route;
 }
 
-?>
+$args = array(
+    'permalink' => '',
+    'image' => '',
+    'image_alignment' => '',
+    'image_alt' => '',
+    'image_caption' => '',
+    'title' => $this->result->title,
+    'title_link' => '1',
+    'author' => '',
+    'author_url' => '',
+    'date' => '',
+    'datetime' => '',
+    'category' => '',
+    'category_url' => '',
+    'hook_aftertitle' => '',
+    'hook_beforearticle' => '',
+    'hook_afterarticle' => '',
+    'article' => ($this->params->get('show_description', 1)) ? JHtml::_('string.truncate', $this->result->description, $this->params->get('description_length', 255)) : '',
+    'tags' => '',
+    'edit' => '',
+    'url' => JRoute::_($route),
+    'more' => '',
+    'previous' => '',
+    'next' => ''
+);
 
-<article class="uk-article">
-
-	<h1 class="uk-article-title">
-		<a href="<?php echo JRoute::_($route); ?>"><?php echo $this->result->title; ?></a>
-	</h1>
-
-	<?php if ($this->params->get('show_description', 1)) : ?>
-		<?php echo JHtml::_('string.truncate', $this->result->description, $this->params->get('description_length', 255)); ?>
-	<?php endif; ?>
-
-	<?php if ($this->params->get('show_url', 1)): ?>
-	<p><?php echo $base . JRoute::_($this->result->route); ?></p>
-	<?php endif; ?>
-
-</article>
+// Render template
+echo $warp['template']->render('article', $args);

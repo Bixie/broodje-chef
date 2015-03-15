@@ -23,7 +23,7 @@ $fraction = function($nominator, $divider = 60) use(&$gcf) {
 };
 
 foreach ($sidebars as $name => $sidebar) {
-	if (!$this['widgets']->count($name)) {
+    if (!$this['widgets']->count($name)) {
         unset($sidebars[$name]);
         continue;
     }
@@ -33,7 +33,7 @@ foreach ($sidebars as $name => $sidebar) {
 }
 
 if ($count = count($sidebars)) {
-	$sidebar_classes .= ' tm-sidebars-'.$count;
+    $sidebar_classes .= ' tm-sidebars-'.$count;
 }
 
 $columns += $sidebars;
@@ -80,7 +80,6 @@ foreach ($positions as $position) {
 $body_classes  = $sidebar_classes;
 $body_classes .= $this['system']->isBlog() ? ' tm-isblog' : ' tm-noblog';
 $body_classes .= ' '.$config->get('page_class');
-$body_classes .= ' '.'tm-content-'.$this['config']->get('content_style');
 
 $config->set('body_classes', trim($body_classes));
 
@@ -106,19 +105,19 @@ $this['asset']->addFile('css', 'css:custom.css');
 
 // add scripts
 $this['asset']->addFile('js', 'js:uikit.js');
-$this['asset']->addFile('js', 'warp:vendor/uikit/js/addons/autocomplete.js');
-$this['asset']->addFile('js', 'warp:vendor/uikit/js/addons/search.js');
-$this['asset']->addFile('js', 'warp:vendor/uikit/js/addons/notify.js');
+$this['asset']->addFile('js', 'warp:vendor/uikit/js/components/autocomplete.js');
+$this['asset']->addFile('js', 'warp:vendor/uikit/js/components/search.js');
+$this['asset']->addFile('js', 'warp:vendor/uikit/js/components/tooltip.js');
+$this['asset']->addFile('js', 'warp:vendor/uikit/js/components/notify.js');
 $this['asset']->addFile('js', 'js:social.js');
 $this['asset']->addFile('js', 'js:theme.js');
-$this['asset']->addFile('js', 'js:systemmessages.js');
 
 // internet explorer
 if ($this['useragent']->browser() == 'msie') {
-	$head[] = sprintf('<!--[if IE 8]><link rel="stylesheet" href="%s"><![endif]-->', $this['path']->url('css:ie8.css'));
+    $head[] = sprintf('<!--[if IE 8]><link rel="stylesheet" href="%s"><![endif]-->', $this['path']->url('css:ie8.css'));
     $head[] = sprintf('<!--[if lte IE 8]><script src="%s"></script><![endif]-->', $this['path']->url('js:html5.js'));
 }
 
 if (isset($head)) {
-	$this['template']->set('head', implode("\n", $head));
+    $this['template']->set('head', implode("\n", $head));
 }

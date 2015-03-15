@@ -14,48 +14,44 @@ jimport('joomla.form.formfield');
 
 class JFormFieldConfig extends JFormField
 {
-    protected $type = 'Config';
+	protected $type = 'Config';
 
-    protected function getInput()
+	protected function getInput()
     {
-        // check compatibility
-        if (version_compare(PHP_VERSION, '5.3.3', '<')) {
-            JFactory::getApplication()->enqueueMessage("PHP ".PHP_VERSION.' installed. This template needs at least PHP 5.3.3!', 'error');
-            return;
-        }
+		// copy callback
+		$this->copyAjaxCallback();
 
-        // copy callback
-        $this->copyAjaxCallback();
+  		// Load jQuery
+		JHtml::_('jquery.framework');
 
-        // get warp
+		// get warp
         $warp = require(JPATH_ROOT.'/templates/'.$this->form->getValue('template').'/warp.php');
-        $warp['system']->document->addScript($warp['path']->url('warp:vendor/jquery/jquery.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/jquery/jquery-mustache.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/jquery/jquery-cookie.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/jquery/jquery-less.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/jquery/jquery-rtl.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/spectrum/spectrum.js'));
-        $warp['system']->document->addScript($warp['path']->url('config:js/admin.js'));
-        $warp['system']->document->addScript($warp['path']->url('warp:vendor/uikit/js/uikit.js'));
+		$warp['system']->document->addScript($warp['path']->url('warp:vendor/uikit/js/uikit.js'));
         $warp['system']->document->addScript($warp['path']->url('warp:vendor/less/less.js'));
-        $warp['system']->document->addScript($warp['path']->url('config:js/config.js'));
-        $warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('warp:vendor/spectrum/spectrum.css')));
-        $warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('config:css/uikit.warp_bs_fix.min.css')));
-        $warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('warp:vendor/uikit/css/uikit.warp.min.css')));
-        $warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('config:css/config.css')));
+		$warp['system']->document->addScript($warp['path']->url('config:js/config.js'));
+		$warp['system']->document->addScript($warp['path']->url('config:js/admin.js'));
+		$warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('warp:vendor/spectrum/spectrum.css')));
+		$warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('config:css/uikit.warp_bs_fix.min.css')));
+		$warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('warp:vendor/uikit/css/uikit.warp.min.css')));
+		$warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('config:css/config.css')));
         $warp['system']->document->addCustomTag(sprintf('<link rel="stylesheet" href="%s">', $warp['path']->url('config:css/admin.css')));
 
-        // render config
-        return $warp['template']->render('config:layouts/config');
-    }
+		// render config
+		return $warp['template']->render('config:layouts/config');
+	}
 
-    protected function copyAjaxCallback()
+	protected function copyAjaxCallback()
     {
-        $source = __DIR__.'/warp-ajax.php';
-        $target = JPATH_ROOT.'/administrator/templates/system/warp-ajax.php';
+		$source = __DIR__.'/warp-ajax.php';
+		$target = JPATH_ROOT.'/administrator/templates/system/warp-ajax.php';
 
-        if (!file_exists($target) || md5_file($source) != md5_file($target)) {
-            JFile::copy($source, $target);
-        }
-    }
+		if (!file_exists($target) || md5_file($source) != md5_file($target)) {
+			JFile::copy($source, $target);
+		}
+	}
 }

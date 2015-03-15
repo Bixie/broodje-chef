@@ -45,7 +45,7 @@ $app = JFactory::getApplication();
 
 <?php if ($this->total == 0) : ?>
 
-	<h1 class="tm-title"><?php echo JText::_('COM_FINDER_SEARCH_NO_RESULTS_HEADING'); ?></h1>
+	<h1 class="title"><?php echo JText::_('COM_FINDER_SEARCH_NO_RESULTS_HEADING'); ?></h1>
 
 	<?php if ($app->getLanguageFilter()) : ?>
 		<p><?php echo JText::sprintf('COM_FINDER_SEARCH_NO_RESULTS_BODY_MULTILANG', $this->escape($this->query->input)); ?></p>
@@ -57,24 +57,20 @@ $app = JFactory::getApplication();
 
 	<?php
 		// Prepare the pagination string.  Results X - Y of Z
-		$start	= (int) $this->pagination->get('limitstart')+1;
 		$total	= (int) $this->pagination->get('total');
-		$limit	= (int) $this->pagination->get('limit') * $this->pagination->get('pages.current');
+		$limit	= (int) $this->pagination->get('limit') * $this->pagination->pagesTotal;
 		$limit	= (int) ($limit > $total ? $total : $limit);
-		$pages	= JText::sprintf('COM_FINDER_SEARCH_RESULTS_OF', $start, $limit, $total);
 	?>
 
-	<br id="highlighter-start" />
-	<div class="uk-margin">
-		<?php
-			for ($i = 0, $n = count($this->results); $i < $n; $i++) {
-				$this->result	= &$this->results[$i];
-				$layout			= $this->getLayoutFile($this->result->layout);
-				echo $this->loadTemplate($layout);
-			}
-		?>
-	</div>
-	<br id="highlighter-end" />
+	<br id="highlighter-start">
+	<?php
+		for ($i = 0, $n = count($this->results); $i < $n; $i++) {
+			$this->result	= &$this->results[$i];
+			$layout			= $this->getLayoutFile($this->result->layout);
+			echo $this->loadTemplate($layout);
+		}
+	?>
+	<br id="highlighter-end">
 
 	<?php echo $this->pagination->getPagesLinks(); ?>
 

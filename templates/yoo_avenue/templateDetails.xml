@@ -2,8 +2,8 @@
 <!DOCTYPE install PUBLIC "-//Joomla! 1.7//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.7/template-install.dtd">
 <extension version="2.5" type="template" client="site" method="upgrade">
 	<name>yoo_avenue</name>
-	<version>1.0.2</version>
-	<creationDate>March 2014</creationDate>
+	<version>1.0.10</version>
+	<creationDate>June 2014</creationDate>
 	<author>YOOtheme</author>
 	<authorEmail>info@yootheme.com</authorEmail>
 	<authorUrl>http://www.yootheme.com</authorUrl>
@@ -35,6 +35,7 @@
 		<folder>less</folder>
 		<folder>styles</folder>
 		<folder>warp</folder>
+        <folder>widgetkit</folder>
 	</files>
     <positions>
         <position settings="">search</position>

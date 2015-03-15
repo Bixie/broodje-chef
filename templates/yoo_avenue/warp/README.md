@@ -1,11 +1,63 @@
 # Warp Theme Framework #
 
-- Version: 7.2.4
-- Date: March 2014
+- Version: 7.3.3
+- Date: February 2015
 - Author: YOOtheme GmbH
 - Website: <http://www.yootheme.com/warp>
 
+
 ## Changelog
+
+    7.3.3
+    # Fixed .uk-link-reset in bootstrap-fix.less (J)
+    # Fixed pagination (J34)
+    + Added icon replacement for RTL mode
+    ^ Updated UIkit to 2.17.0
+    ^ Updated language files (J)
+
+    7.3.2
+    + Added child theme support (WP)
+    + Added Widgetkit 2 support
+    ^ Updated UIkit to 2.15.0
+    # Added Less 1.5.1 for developer mode, to support compiling on IOS 8
+    
+    7.3.1
+    # Fixed input fields height in Woocommerce (WP)
+
+    7.3.0
+    ^ Updated UIkit to 2.10.0
+    ^ Updated Bootstrap fix (J3)
+    ^ Updated Bootstrap layer (J3)
+    ^ Updated LESS compiler to 1.7.5
+    ^ Added Woocommerce support (WP)
+    ^ Added modules front-end edit (J)
+    ^ Added system output on offline page (J)
+    ^ Replaced all input[type=submit] with button[type="submit"]
+    ^ Changed title-rendering to wp_title with custom filter (WP)
+    # Fixed comments reply button (WP)
+    # Fixed widget assignments for custom post types (WP)
+    - Removed search close button and loading spinner
+
+    7.2.8
+    # Fixed pagination page-button issue
+
+    7.2.7
+    ^ Updated UIkit to 2.8.0
+
+    7.2.6
+    # Fixed cancel comment reply link (WP)
+    ^ Updated category override (J)
+    # Fixed dropdown navbar column width calculation
+    ^ Added transform to CSS RTL conversion
+
+    7.2.5
+    ^ Updated facebook like button
+    ^ Added two factor authentication to offline site (J3)
+    # Fixed use default style.less from configured less folder
+    # Fixed search in widgets view (WP)
+    # Fixed more results in search
+    # Fixed unclosed element in recent comments widget (WP)
+    # Fixed spacing issue in author view (WP)
 
     7.2.4
     ^ Updated UIkit to 2.6.0

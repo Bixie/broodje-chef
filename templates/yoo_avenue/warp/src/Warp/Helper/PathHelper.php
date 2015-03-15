@@ -48,6 +48,8 @@ class PathHelper extends AbstractHelper
         }
 
         array_unshift($this->_paths[$namespace], $path);
+
+        return $this;
     }
 
     /**
