@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system">
+	<name>plg_system_bix_ideal</name>
+	<author>Matthijs Alles</author>
+	<creationDate>May 2013</creationDate>
+	<copyright>Copyright (C) 2013 Bixie. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>admin@bixie.nl</authorEmail>
+	<authorUrl>www.bixie.nl</authorUrl>
+	<version>2.5.0</version>
+	<description>PLG_BIX_IDEAL_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="bix_ideal">bix_ideal.php</filename>
+		<filename>index.html</filename>
+	</files>
+	<languages>
+		<language tag="nl-NL">nl-NL.plg_system_bix_ideal.ini</language>
+		<language tag="nl-NL">nl-NL.plg_system_bix_ideal.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="artikelItemid" type="menuitem"
+					class="inputbox" label="PLG_BIX_IDEAL_ARTIKEL_ITEMID"
+					description="PLG_BIX_IDEAL_ARTIKEL_ITEMID_DESC" 
+					default=""/>
+				<field name="pspID" type="text"
+					class="inputbox" label="PSP-ID"
+					description="Zoals verkregen van de bank"
+					default=""/>
+				<field name="mailto" type="text"
+					class="inputbox" label="Emails naar"
+					description="Kommagescheiden, geen spaties!"
+					default=""/>
+				<field name="idealTest" type="radio" default="0"
+					label="Testmodus iDEAL"
+					description="Naar testideal">
+					<option value="1">Ja</option>
+					<option value="0">Nee</option>
+				</field>
+				<field name="mailTest" type="radio" default="0"
+					label="Testmodus mail"
+					description="Geen mail versturen.">
+					<option value="1">Ja</option>
+					<option value="0">Nee</option>
+				</field>
+				<field name="mailCSS" type="textarea"
+					class="inputbox" label="Email CSS"
+					description="Om het allemaal wat mooier te maken!"
+					default=""/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
