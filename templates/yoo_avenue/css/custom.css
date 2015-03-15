@@ -1,0 +1,171 @@
+/* Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
+/* ========================================================================
+   Use this file to add custom CSS easily
+ ========================================================================== */
+ 
+ body {
+background: #bfb6ba url("../images/background/bg_cc.png") fixed;
+box-shadow: none;
+}
+
+
+
+.uk-button-primary  {
+color: #ffffff;
+background: #dd8800; /* Old browsers */
+background: -moz-linear-gradient(top,  #dd8800 0%, #dba759 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dd8800), color-stop(100%,#dba759)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #dd8800 0%,#dba759 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #dd8800 0%,#dba759 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #dd8800 0%,#dba759 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #dd8800 0%,#dba759 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd8800', endColorstr='#dba759',GradientType=0 ); /* IE6-9 */
+
+}
+
+.uk-button-primary:hover  {
+color: #ffffff;
+background: #dba759; /* Old browsers */
+background: -moz-linear-gradient(top,  #dba759 0%, #dd8800 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dba759), color-stop(100%,#dd8800)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #dba759 0%,#dd8800 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #dba759 0%,#dd8800 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #dba759 0%,#dd8800 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #dba759 0%,#dd8800 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dba759', endColorstr='#dd8800',GradientType=0 ); /* IE6-9 */
+
+}
+
+.uk-panel-box-primary {
+color: #ffffff;
+background: #8cc63f; /* Old browsers */
+background: -moz-linear-gradient(top,  #8cc63f 32%, #7bad38 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(32%,#8cc63f), color-stop(100%,#7bad38)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #8cc63f 32%,#7bad38 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8cc63f', endColorstr='#7bad38',GradientType=0 ); /* IE6-9 */
+}
+
+
+.uk-panel-box-primary a{
+	color:#ffc68e;
+}
+
+
+.uk-button-primary:hover {
+	background-color: #7caf38;
+}
+
+.uk-navbar-nav > li.uk-active > a {
+
+color: #ffffff;
+background: #8cc63f; /* Old browsers */
+background: -moz-linear-gradient(top,  #8cc63f 32%, #7bad38 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(32%,#8cc63f), color-stop(100%,#7bad38)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #8cc63f 32%,#7bad38 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #8cc63f 32%,#7bad38 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8cc63f', endColorstr='#7bad38',GradientType=0 ); /* IE6-9 */
+
+}
+
+.tm-main .tm-content{
+	margin: -20px 0 0px 0;
+}
+
+
+.uk-panel-header .uk-panel-title, a, .uk-subnav > li > a,.uk-nav-navbar ul a {
+
+color: #8cc63f;
+}
+
+
+.chronoform{
+	display: none;
+}
+
+div.staff{
+	height:172px;
+}
+
+pre h3{
+	margin:0px;
+}
+
+pre{
+	margin: 15px 0 10px 0;
+}
+
+.yoo-zoo H1{
+	color:#cecece;
+}
+
+
+.bestelvoorwaarden{
+	background:url(../../../images/bg_sandwitch.jpg);
+}
+
+.bestelvoorwaarden h3.uk-panel-title {
+	font-size:30px;
+	color:#000;
+	text-shadow:0 0 2px #fff;
+	margin-bottom: 30px;
+}
+
+.blog-chefexcl img{
+	margin:0 0px 10px 0px;
+	}
+ 
+.uk-form-row button {
+	float:left;
+}
+
+
+.yoo-zoo .item .pos-subtitle {
+font-size: 13px;
+}
+
+.prijs h3.uk-panel-title{
+	float:left;
+	color:#2c2d30;
+	font-size:24px;
+	font-weight: 400;
+}
+
+.broodjevdweek_prijs{
+	height: 79px;
+	margin-top: -44px;
+	width: 98px;
+	background: url(../../../images/bg_prijs.png) 50% 50% no-repeat;
+	transform: rotate(-7deg);
+	-ms-transform: rotate(-7deg);
+	-webkit-transform: rotate(-7deg);
+	float: right;
+	font-size: 36px;
+	padding: 56px 0px 0 17px;
+	color: #fff;
+	text-shadow: 1px 1px 1px #000;
+	
+}
+
+
+
+.wk-slideshow-tabs .nav-left+.slides-container {
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+
+}
+
+
+
+
+
+
+
+
+
