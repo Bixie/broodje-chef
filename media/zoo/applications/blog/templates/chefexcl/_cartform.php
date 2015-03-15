@@ -28,84 +28,137 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 
 ?>
 
-<div class="formHolder">
+<div class="formHolder uk-form">
 	<div class="bezorginfoHolder">
-		<div id="bezorginfo"></div>
+		<div id="bezorginfo" class="uk-alert"></div>
 	</div>
-	<div class="grid-block width100">
-		<div class="grid-box width33 userForm adresbox">
-			<h3>Adresgegevens</h3>
-			<ul class="form">
-				<li><label for="ufnaam">Naam*</label><input type="text" id="ufnaam" name="userdata[naam]" value="<?php echo $naam; ?>" class="inputbox required" size="20"/></li>
-				<li><label for="ufemail">E-mail*</label><input type="text" id="ufemail" name="userdata[email]" value="<?php echo $email; ?>" class="inputbox validate-email required" size="20"/></li>
-				<li><label for="uftelefoon">Telefoon*</label><input type="text" id="uftelefoon" name="userdata[telefoon]" value="" class="inputbox required" size="20"/></li>
-				<li><label for="ufpostcode">Postcode*</label><input type="text" id="ufpostcode" name="userdata[postcode]" value="" class="inputbox required postcode" size="20"/></li>
-				<li><label for="ufhuisnummer">Huisnummer*</label><input type="text" id="ufadres" name="userdata[huisnummer]" value="" class="inputbox required huisnummer" size="20"/></li>
-				<li><label for="ufhuisnummer_toevoeging">Toevoeging</label><input type="text" id="ufadres" name="userdata[huisnummer_toevoeging]" value="" class="inputbox huisnummer_toevoeging" size="20"/></li>
-				<li><label for="ufadres">Straatnaam*</label><input type="text" id="ufadres" name="userdata[straat]" value="" class="inputbox required straat" size="20"/></li>
-				<li><label for="ufplaats">Plaats*</label><input type="text" id="ufplaats" name="userdata[plaats]" value="" class="inputbox required plaats" size="20"/></li>
-			</ul>
-			<input type="hidden" name="userdata[land]" value="NL" class="land"/>
-			<input type="hidden" name="userdata[adrestype]" value="" class="type"/>
-			<input type="hidden" name="vervoersInfo" value="" id="vervoersInfoInput"/>
-			<input type="hidden" name="userdata[lat]" value="" class="lat"/>
-			<input type="hidden" name="userdata[lon]" value="" class="lon"/>
-		<?php
-		 ?>
-		</div>
-		<div class="grid-box width33 betalen">
-			<ul class="form">
-				<li><label for="leverdatum">Leverdatum</label>
-				<?php echo JHtml::_('calendar', date('Y-m-d'), 'leverdatum', 'leverdatum', '%Y-%m-%d', array('class'=>'inputbox calendar','size'=>9)); ?></li>
-				<li><label for="uur">Levertijd</label>
-				<select name="uur" id="uur" class="inputbox" size="1">
-					<option value="09">09</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12" selected="selected">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-				</select>
-				<select name="minuut" id="minuut" class="inputbox" size="1">
-					<option value="00" selected="selected">00</option>
-					<option value="15">15</option>
-					<option value="30">30</option>
-					<option value="45">45</option>
-				</select>
-				</li>	
-				<li><label for="betaalwijze">Betaalmethode</label>
-				<select name="betaalwijze" id="betaalwijze" class="inputbox" size="1">
-					<option value="iDEAL" selected="selected">iDEAL</option>
-					<option value="Contant">Contant</option>
-				<?php if (in_array($rekeningGroup,$myGroups)) : ?>
-					<option value="Op rekening">Op rekening</option>
-				<?php endif; ?>
-				</select>
-				</li>	
-			</ul>
-			<input type="hidden" id="prijs" name="prijs" value="0">
-			<input type="hidden" id="btw" name="btw" value="0">
-			<h3>Opmerkingen</h3>
-			<textarea name="opmerking" class="opmerking" rows="2" cols="20"></textarea>
-		</div>
-		<div class="grid-box width33 prijs">
-			<h3>Prijs</h3>
-			<div class="prices">
-			<h2 id="prijsTotaal">€ 0,00</h2>
-			<span class="prijsBtw">(incl. <span id="prijsBtw">€ 0,00</span> btw)</span>
+	<div class="uk-grid" data-uk-margin data-uk-grid-match="{target:'.uk-panel'}">
+		<div class="uk-width-medium-1-3 userForm adresbox">
+			<div class="uk-panel">
+				<h3>Adresgegevens</h3>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="ufnaam">Naam*</label>
+					<div class="uk-form-controls"><input type="text" id="ufnaam" name="userdata[naam]" value="<?php echo $naam; ?>" class="uk-width-1-1 required" size="20"/></div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="ufemail">E-mail*</label>
+					<div class="uk-form-controls"><input type="text" id="ufemail" name="userdata[email]" value="<?php echo $email; ?>" class="uk-width-1-1 validate-email required" size="20"/></div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="uftelefoon">Telefoon*</label>
+					<div class="uk-form-controls"><input type="text" id="uftelefoon" name="userdata[telefoon]" value="" class="uk-width-1-1 required" size="20"/></div>
+				</div>
+				<div class="uk-form-row">
+					<div class="uk-grid">
+						<div class="uk-width-1-3">
+							<label class="uk-form-label" for="ufpostcode">Postcode*</label>
+							<div class="uk-form-controls"><input type="text" id="ufpostcode" name="userdata[postcode]" value="" class="uk-width-1-1 required postcode" size="20"/></div>
+						</div>
+						<div class="uk-width-1-3">
+							<label class="uk-form-label" for="ufhuisnummer">Huisnummer*</label>
+							<div class="uk-form-controls"><input type="text" id="ufadres" name="userdata[huisnummer]" value="" class="uk-width-1-1 required huisnummer" size="20"/></div>
+						</div>
+						<div class="uk-width-1-3">
+							<label class="uk-form-label" for="ufhuisnummer_toevoeging">Toevoeging</label>
+							<div class="uk-form-controls"><input type="text" id="ufadres" name="userdata[huisnummer_toevoeging]" value="" class="uk-width-1-1 huisnummer_toevoeging" size="20"/></div>
+						</div>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="ufadres">Straatnaam*</label>
+					<div class="uk-form-controls"><input type="text" id="ufadres" name="userdata[straat]" value="" class="uk-width-1-1 required straat" size="20"/></div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="ufplaats">Plaats*</label>
+					<div class="uk-form-controls"><input type="text" id="ufplaats" name="userdata[plaats]" value="" class="uk-width-1-1 required plaats" size="20"/></div>
+				</div>
+				<input type="hidden" name="userdata[land]" value="NL" class="land"/>
+				<input type="hidden" name="userdata[adrestype]" value="" class="type"/>
+				<input type="hidden" name="vervoersInfo" value="" id="vervoersInfoInput"/>
+				<input type="hidden" name="userdata[lat]" value="" class="lat"/>
+				<input type="hidden" name="userdata[lon]" value="" class="lon"/>
 			</div>
-			<h3>Bevestigen</h3>
-			<input type="checkbox" name="vrwdn" id="vrwdn" value="1" class="inputbox required" />
-			<label for="vrwdn">Ik heb de bestelvoorwaarden gelezen.</label>
-			<button type="submit" class="betalen">Bevestig bestelling</button>
-			
+		</div>
+		<div class="uk-width-medium-1-3 betalen">
+			<div class="uk-panel">
+				<h3>Bezorging en betaling</h3>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="leverdatum">Leverdatum</label>
+					<div class="uk-form-controls"><?php echo JHtml::_('calendar', date('Y-m-d'), 'leverdatum', 'leverdatum', '%Y-%m-%d', array('class'=>'uk-width-5-6 calendar','size'=>9)); ?></div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="uur">Levertijd</label>
+					<div class="uk-form-controls uk-grid">
+						<div class="uk-width-1-2">
+							<select name="uur" id="uur" class="uk-width-1-1" size="1">
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12" selected="selected">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+							</select>
+						</div>
+						<div class="uk-width-1-2">
+							<select name="minuut" id="minuut" class="uk-width-1-1" size="1">
+								<option value="00" selected="selected">00</option>
+								<option value="15">15</option>
+								<option value="30">30</option>
+								<option value="45">45</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="uk-form-row">
+					<label class="uk-form-label" for="betaalwijze">Betaalmethode</label>
+					<div class="uk-form-controls uk-grid">
+						<div class="uk-width-5-6">
+							<select name="betaalwijze" id="betaalwijze" class="uk-width-1-1" size="1">
+								<option value="iDEAL" selected="selected">iDEAL</option>
+								<option value="Contant">Contant</option>
+							<?php $disabled = in_array($rekeningGroup,$myGroups) ? '':' disabled="disabled"' ?>
+								<option value="Op rekening"<?php echo $disabled; ?>>Op rekening</option>
+							
+							</select>
+						</div>
+						<div class="uk-width-1-6">
+							<button class="uk-button uk-icon-button uk-icon-question" data-uk-tooltip title="Op rekening betalen? Meld u bovenaan deze pagina aan als vaste klant."></button>
+						</div>
+					</div>
+				</div>
+				<input type="hidden" id="prijs" name="prijs" value="0">
+				<input type="hidden" id="btw" name="btw" value="0">
+				<h3>Opmerkingen</h3>
+				<textarea name="opmerking" class="uk-width-1-1 opmerking" rows="2" cols="20"></textarea>
+			</div>
+		</div>
+		<div class="uk-width-medium-1-3 prijs">
+			<div class="uk-panel uk-panel-box uk-panel-box-primary">
+				<h3 class="uk-panel-title">Prijs</h3>
+				<div class="uk-text-right prices">
+					<h2 id="prijsTotaal">€ 0,00</h2>
+					<span class="prijsBtw">(incl. <span id="prijsBtw">€ 0,00</span> btw)</span>
+				</div>
+				<h3>Bevestigen</h3>
+				
+				<div class="uk-form-row">
+					<div class="uk-form-controls uk-form-controls-text">
+						<label for="vrwdn">
+							<input type="checkbox" name="vrwdn" id="vrwdn" value="1" class="required" />
+							Ik heb de bestelvoorwaarden gelezen.
+						</label>
+					</div>
+				</div>
+				<button type="submit" class="uk-button uk-button-large uk-button-primary uk-width-1-1 uk-margin-top betalen">
+					<i class="uk-icon-check uk-margin-small-right"></i>Bevestig bestelling</button>
+			</div>
 		</div>
 	</div>
 	<div class="hidden">
-		<select name="verzgebied" id="verzgebied" class="inputbox required" size="1">
+		<select name="verzgebied" id="verzgebied" class="uk-width-1-1 required" size="1">
 			<option value="">Maak een keuze</option>
 			<option value="utwente">Business & Science Parc / Campus U-Twente / Havengebied & FC Twente Stadion (Enschede)</option>
 			<option value="marssteden">Industriegebied Marssteden</option>

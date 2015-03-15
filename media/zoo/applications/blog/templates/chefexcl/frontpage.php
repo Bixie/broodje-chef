@@ -31,7 +31,7 @@ $css_class = $this->application->getGroup().'-'.$this->template->name;
 
 ?>
 
-<div id="system" class="yoo-zoo <?php echo $css_class; ?> <?php echo $css_class.'-frontpage'; ?>">
+<div class="yoo-zoo <?php echo $css_class; ?> <?php echo $css_class.'-frontpage'; ?>">
 
 	<?php if ($this->params->get('template.show_title')) : ?>
 	<h1 class="title"><?php echo $this->application->getParams()->get('content.title') ?></h1>

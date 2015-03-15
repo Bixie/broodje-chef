@@ -13,11 +13,6 @@ $jparams	= $japp->getParams();
 $shopPage = stripos($jparams->get('pageclass_sfx',''),'shop') !== false;
 if ($shopPage) {
 	$this->params->set('template.items_cols', 1);
-	JHtml::_('behavior.mootools');
-	$js = "window.addEvent('load', function() {"
-				."bixZooShop.loadDom('bixZooShopform',".json_encode($params)."); "
-			."});";
-	$this->app->document->addScriptDeclaration($js);
 }
 // init vars
 $i       = 0;
@@ -32,7 +27,7 @@ $renderer		= $this->app->document->loadRenderer('module');
 if ($shopPage) {
 	$itemId = $this->params->get('template.artikelItemid', 0);
 	$url = JRoute::_('index.php?Itemid='.$itemId);
-	echo '<form class="short style form-validate" id="bixZooShopform" method="post" action="'.$url.'">';
+	echo '<form class="short style form-validate" data-bix-shopform="{btw:hoog:21,laag:6}" id="bixZooShopform" method="post" action="'.$url.'">';
 	$currentCategoryId = 0;
 	$currentCategory = false;
 	foreach ($this->items as $item) {
