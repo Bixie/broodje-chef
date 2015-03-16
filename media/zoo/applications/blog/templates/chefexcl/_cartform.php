@@ -34,7 +34,7 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 	</div>
 	<div class="uk-grid" data-uk-margin data-uk-grid-match="{target:'.uk-panel'}">
 		<div class="uk-width-medium-1-3 userForm adresbox">
-			<div class="uk-panel">
+			<div class="uk-panel bix-adres">
 				<h3>Adresgegevens</h3>
 				<div class="uk-form-row">
 					<label class="uk-form-label" for="ufnaam">Naam*</label>
@@ -56,11 +56,11 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 						</div>
 						<div class="uk-width-1-3">
 							<label class="uk-form-label" for="ufhuisnummer">Huisnummer*</label>
-							<div class="uk-form-controls"><input type="text" id="ufadres" name="userdata[huisnummer]" value="" class="uk-width-1-1 required huisnummer" size="20"/></div>
+							<div class="uk-form-controls"><input type="text" id="ufhuisnummer" name="userdata[huisnummer]" value="" class="uk-width-1-1 required huisnummer" size="20"/></div>
 						</div>
 						<div class="uk-width-1-3">
 							<label class="uk-form-label" for="ufhuisnummer_toevoeging">Toevoeging</label>
-							<div class="uk-form-controls"><input type="text" id="ufadres" name="userdata[huisnummer_toevoeging]" value="" class="uk-width-1-1 huisnummer_toevoeging" size="20"/></div>
+							<div class="uk-form-controls"><input type="text" id="ufhuisnummer_toevoeging" name="userdata[huisnummer_toevoeging]" value="" class="uk-width-1-1 huisnummer_toevoeging" size="20"/></div>
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,7 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 				<h3>Bezorging en betaling</h3>
 				<div class="uk-form-row">
 					<label class="uk-form-label" for="leverdatum">Leverdatum</label>
-					<div class="uk-form-controls"><?php echo JHtml::_('calendar', date('Y-m-d'), 'leverdatum', 'leverdatum', '%Y-%m-%d', array('class'=>'uk-width-5-6 calendar','size'=>9)); ?></div>
+					<div class="uk-form-controls"><?php echo JHtml::_('calendar', date('Y-m-d'), 'leverdatum', 'leverdatum', '%Y-%m-%d', array('class'=>'calendar','size'=>9)); ?></div>
 				</div>
 				<div class="uk-form-row">
 					<label class="uk-form-label" for="uur">Levertijd</label>

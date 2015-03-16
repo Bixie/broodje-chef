@@ -26,7 +26,6 @@ class ElementShopform extends ElementOption {
 	public function render($params = array()) {
 		$typeInfo = bixZooHelper::getTypeInfo($this->_item,bixZooHelper::zooApplication($this->_item->application_id));
 		$paramsReg = $this->app->data->create($params);
-		$this->app->document->addScript('elements:shopform/shopform.js');
 		$shopOptions = $this->getShopOpties(array('shopoptie','shopaantal'));
 		$data = $this->data('data',array());
 		$itemData = bixZooHelper::getData($this->_item,$typeInfo);
@@ -49,7 +48,7 @@ class ElementShopform extends ElementOption {
 		$price = $this->cleanFloatValue($itemData['Basisprijs']['valuta']);
 		$btw = $itemData['BTW']['option'][0];
 		
-		$js = "bixZooShop.addProduct(".$this->_item->id.",{"
+		$js = "UIkit.bixZooShop.addProduct(".$this->_item->id.",{"
 				."productID: ".$this->_item->id.","
 				."price: ".$price.","
 				."btw: '".$btw."',"

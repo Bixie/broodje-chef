@@ -39,28 +39,26 @@ class ElementShopaantal extends ElementOption {
 				}
 			}
 		}
-		$width = floor(100/count($selected_options));
-		if (count($selected_options) > 11) $width = 16;
-		$options = array();
-		$html    = array('<div class="aantalholder">');
-		foreach ($this->config->get('option', array()) as $option) {
+		$html    = array('<div class="aantalholder uk-flex">');
+		$options = $this->config->get('option', array());
+		$count = count($selected_options);
+		foreach ($options as $option) {
 			if (in_array($option['value'], $selected_options)) {
-				//$options[] = $option['name'];
 				$title = $prices[$option['value']]>0?'Meerprijs per stuk: € '.number_format($prices[$option['value']],2,',','.'):'';
-				$html[]  = '<div class="grid-box aantal">';
+				$html[]  = '<div class="uk-width-1-'.$count.' aantal uk-flex uk-flex-middle uk-flex-right">';
 				if ($params->get('show_label',0)) {
 					$html[]  = '<div class="labelholder"><label title="'.$title.'">'.$option['name'].'</label></div>';
 					$title = '';
 				} else {
 					$title = $option['name'].'. '.$title;
 				}
-				$html[]  = '<div class="select"><input id="shopaantal-'.$this->_item->id.$option['value'].'" type="text" 
+				$html[] = '<div class="select"><input id="shopaantal-'.$this->_item->id.$option['value'].'" type="text" 
 								onfocus="if (this.value==\'0\')this.value=\'\'" onblur="if (this.value==\'\')this.value=\'0\'"
-								class="shopaantal" size="5" title="'.$title.'" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="0" />';
+								class="shopaantal uk-form-small uk-text-right" size="3" title="'.$title.'" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="0" />';
 				if ($params->get('show_buttons',0)) {
-					$html[]  = '<div class="plminbuttons">';
-					$html[]  = '<button type="button" class="butt plus" onclick="document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()+1));bixZooShop.calculate()">+</button>';
-					$html[]  = '<button type="button" class="butt min" onclick="if(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt() > 0)document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()-1));bixZooShop.calculate()">-</button>';
+					$html[]  = '<div class="plminbuttons uk-button-group">';
+					$html[]  = '<button type="button" class="uk-button uk-button-mini uk-button-success butt plus" onclick="document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()+1))"><i class="uk-icon-plus"></i></button>';
+					$html[]  = '<button type="button" class="uk-button uk-button-mini uk-button-danger butt min" onclick="if(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt() > 0)document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()-1));"><i class="uk-icon-minus"></i></button>';
 					$html[]  = '</div>';
 				}
 				$html[]  = '</div></div>';
@@ -103,8 +101,8 @@ class ElementShopaantal extends ElementOption {
 				$checked = in_array($option['value'], $selected_options) ? ' checked="checked"' : null;
 				$html[]  = '<div><input id="'.$name.$i.'" type="checkbox" name="'.$name.'" value="'.$option['value'].'"'.$checked.' /><label for="'.$name.$i++.'">'.$option['name'].'</label></div>';
 			}
-				// workaround: if nothing is selected, the element is still being transfered
-				$html[] = '<input type="hidden" name="'.$this->getControlName('check').'" value="1" />';
+			// workaround: if nothing is selected, the element is still being transfered
+			$html[] = '<input type="hidden" name="'.$this->getControlName('check').'" value="1" />';
 			$html[] = '</div>';
 
 			return implode("\n", $html);

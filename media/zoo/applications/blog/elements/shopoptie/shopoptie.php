@@ -45,7 +45,12 @@ class ElementShopoptie extends ElementOption {
 		foreach ($this->config->get('option', array()) as $option) {
 			if (in_array($option['value'], $selected_options)) {
 				$title = $prices[$option['value']]>0?'Meerprijs per stuk: € '.number_format($prices[$option['value']],2,',','.'):'';
-				$html[]  = '<div class="grid-block"><input id="shopaantal-'.$this->_item->id.''.$option['value'].$i.'" type="checkbox" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="1" /><label for="shopaantal-'.$this->_item->id.''.$option['value'].$i++.'" title="'.$title.'">'.$option['name'].'</label></div>';
+				$html[]  = '<div class="grid-block"><input
+						id="shopaantal-'.$this->_item->id.''.$option['value'].$i.'" type="checkbox"
+						name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']"
+						value="1" /><label
+						for="shopaantal-'.$this->_item->id.''.$option['value'].$i++.'"
+						title="'.$title.'">'.$option['name'].'</label></div>';
 			}
 		}
 		$html[] = '</div>';

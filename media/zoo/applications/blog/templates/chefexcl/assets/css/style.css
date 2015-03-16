@@ -94,19 +94,17 @@
 	}
 }
 
-div.aantalholder  {
-	float:right;
-}
 .width12 { width:12.5%;}
 
+.aantalholder input.shopaantal {
+    height: 20px !important;
+    width: 30px;
+    margin-bottom: 0 !important;
+}
+input.calendar {
+    width: 170px !important;
+}
 div.pos-content {
 	float: right;	
 }
 .hidden {display:none}
-/*postcode*/
-div.adresbox.waiting input[name*=straat],
-div.adresbox.waiting input[name*=plaats] {
-	background-image:url(spinner.gif);
-	background-position: 95% 50%;
-	background-repeat: no-repeat;
-}
