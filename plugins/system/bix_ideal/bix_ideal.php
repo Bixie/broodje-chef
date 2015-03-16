@@ -6,6 +6,7 @@
 
 defined('JPATH_BASE') or die;
 
+use \Joomla\Registry\Registry as JRegistry;
 
 /**
  * Plugin class for redirect handling.
@@ -24,7 +25,7 @@ class plgSystemBix_ideal extends JPlugin {
 	}	
 	public function onContentPrepare($context, &$article, &$params, $page = 0)	{
 		$app = JFactory::getApplication();
-		$currentItemid = JRequest::getInt('Itemid',0);
+		$currentItemid = $app->input->getInt('Itemid',0);
 		$bedanktItemid = $this->params->get('artikelItemid', 0);
 		$orderID = uniqid('cc');
 		$bestelDatum = strftime('%Y-%m-%d %T',time());
@@ -32,7 +33,7 @@ class plgSystemBix_ideal extends JPlugin {
 			return true;
 		}
 		//request of return
-		$shopdata = JRequest::getVar('shopdata',array(),'post','array');
+		$shopdata = $app->input->get('shopdata',array(),'array');
 		if (count($shopdata)) {
 //echo '<pre>'.$context;
 //print_r(JRequest::get('POST'));
@@ -51,7 +52,6 @@ class plgSystemBix_ideal extends JPlugin {
 			$html[] = '<table border="0" cellpadding="5" cellspacing="0" width="100%" class="prodtable">';
 			$html[] = '<tbody>';
 			$i = 0;
-			$k = 0;
 			foreach ($shopdata as $productID=>$aantalElement) {
 				$prodhtml = array();
 				$prodaantal = 0;
@@ -73,8 +73,8 @@ class plgSystemBix_ideal extends JPlugin {
 				}
 			}
 			//userdata
-			$prijs = JRequest::getVar('prijs',0,'post');
-			$btw = JRequest::getVar('btw',0,'post');
+			$prijs = $app->input->post->getFloat('prijs',0);
+			$btw = $app->input->post->getFloat('btw',0);
 			$html[] = '<tr>';
 			$html[] =	 '<td class="mcnTextContent">Netto totaal</td>';
 			$html[] =	 '<td style="text-align:right;border-top:1px solid #ccc;" class="mcnTextContent">€ '.number_format(($prijs - $btw),2,',','.').'</td>';
@@ -89,7 +89,7 @@ class plgSystemBix_ideal extends JPlugin {
 			$html[] = '</tr>';
 			$html[] = '</tbody>';
 			$html[] = '</table><br/>';
-			$userdata = JRequest::getVar('userdata',array(),'post','array');
+			$userdata = $app->input->post->get('userdata',array());
 			$html[] = '<h3>Bezorggegevens</h3>';
 			$userMail = 'admin@bixie.nl';
 			foreach ($userdata as $key=>$value) {
@@ -100,17 +100,17 @@ class plgSystemBix_ideal extends JPlugin {
 				$html[] = '<span>'.ucfirst(str_replace('_',' ',$key)).':</span> <span>'.$value.'</span><br/>';
 				if ($key == 'email') $userMail = $value;
 			}
-			$opmerking = JRequest::getVar('opmerking','-','post');
+			$opmerking = $app->input->post->getString('opmerking','-');
 			$html[] = '<h3>Opmerkingen</h3><p>';
 			$html[] = nl2br($opmerking);
 			$html[] = '</p>';
-			$vervoersInfo = JRequest::getVar('vervoersInfo','','post');
-			$leverdatum = JRequest::getVar('leverdatum','','post');
-			$uur = JRequest::getVar('uur','','post');
-			$minuut = JRequest::getVar('minuut','','post');
+			$vervoersInfo = $app->input->post->getString('vervoersInfo','');
+			$leverdatum = $app->input->post->getString('leverdatum','');
+			$uur = $app->input->post->getString('uur','');
+			$minuut = $app->input->post->getString('minuut','');
 			$html[] = '<strong>Verzorgingsgebied:</strong> <span>'.$vervoersInfo.'</span><br/>';
 			$html[] = '<strong>Levertijd:</strong> <span>'.JHtml::_('date',$leverdatum,'DATE_FORMAT_LC3').', '.$uur.':'.$minuut.'</span><br/>';
-			$betaalwijze = JRequest::getVar('betaalwijze','','post');
+			$betaalwijze = $app->input->post->getString('betaalwijze','');
 			$html[] = '<strong>Besteldatum:</strong> <span>'.JHTML::_( 'date', $bestelDatum, "DATE_FORMAT_LC3" ).'</span><br/>';
 			$html[] = '<strong>Betaalmethode:</strong> <span>'.$betaalwijze.'</span><br/>';
 			$html[] = '<strong>Order ID:</strong> <span>'.$orderID.'</span><br/>';
@@ -132,7 +132,7 @@ class plgSystemBix_ideal extends JPlugin {
 			
 			$mailContent = '';
 			ob_start();
-			include(dirname(__FILE__).'/tmpl/mail.php');
+			include(dirname(__FILE__) . '/tmpl/mail.php');
 
 			$mailContent = ob_get_clean();
 			// if (!$this->params->def('mailTest', 0)) 
@@ -167,13 +167,13 @@ class plgSystemBix_ideal extends JPlugin {
 				$app->setUserState('plg_bix_ideal.idealForm',$this->idealForm);
 			}
 			
-		} elseif (JRequest::getVar('h','')) {
+		} elseif ($app->input->post->getString('h','')) {
 			$errorMsg = false;
 			$this->idealForm = $app->getUserState('plg_bix_ideal.idealForm',array());
+			$idealSuccess = false;
 			if (isset($this->idealForm->idealURL)) {
-				$hash = JRequest::getVar('h','');
-				$event = JRequest::getVar('e',false);
-				$idealSuccess = false;
+				$hash = $app->input->post->getString('h','');
+				$event = $app->input->post->getString('e',false);
 				$checkHash = $this->getHash();
 				if (!$event && $checkHash == $hash) {
 					$idealSuccess = true;
@@ -228,7 +228,7 @@ class plgSystemBix_ideal extends JPlugin {
 		$hash = $this->getHash();
 		$html = array();
 		$html[] = '<script>';
-		$html[] = "window.addEvent('load', function() {setTimeout(function () {document.idealForm.submit()},500);});";
+		$html[] = "jQuery(function() {setTimeout(function () {document.idealForm.submit()},500);});";
 		$html[] = '</script>';
 		$html[] = '<h5>U wordt doorgelinkt naar iDEAL...</h5>';
 		$html[] = '<form method="post" action="'.$this->idealForm->idealURL.'" id="idealForm" name="idealForm" class="style">';
@@ -250,4 +250,132 @@ class plgSystemBix_ideal extends JPlugin {
 		return implode ("\n",$html);
 	}
 
+	public function onAjaxBix_ideal () {
+		$data = JFactory::getApplication()->input->get('data', array(), 'array');
+// print_r($data) ;
+		$helper = new PostcodeNl_Api_Helper_Data();
+		return array(
+			'response' => $helper->lookupAddress($data['postcode'], $data['huisnummer'], $data['huisnummer_toevoeging']));
+
+	}
+}
+
+
+
+/*
+Copyright (c) 2012, Postcode.nl B.V.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are
+permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this list of
+      conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice, this list
+      of conditions and the following disclaimer in the documentation and/or other materials
+      provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+class PostcodeNl_Api_Helper_Data {
+	const API_TIMEOUT = 3;
+
+	public function lookupAddress($postcode, $houseNumber, $houseNumberAddition)
+	{
+		$serviceUrl = 'https://api.postcode.nl';
+		$serviceKey = '6sweluzZcaevmcWEFUGW7qYWE1wD9XPdjZLtoRvtVoO';
+		$serviceSecret = 'fABWL3t88Et8QysjAUrBrfsYG1nZVjAoKEIdOkiiaMw';
+		$serviceShowcase = false;
+		$serviceDebug = false;
+
+
+		if (!$serviceUrl || !$serviceKey || !$serviceSecret)
+		{
+			return array('message' => JText::_('COM_BIXPRINTSHOP_PLG_POSTCODEFILL_NOT_CONFIGURED'));
+		}
+
+		// Check for SSL support in CURL, if connecting to `https`
+		if (substr($serviceUrl, 0, 8) == 'https://')
+		{
+			$curlVersion = curl_version();
+			if (!($curlVersion['features'] & CURL_VERSION_SSL))
+			{
+				return array('message' => 'Cannot connect to Postcode.nl API: Server is missing SSL (https) support for CURL.');
+			}
+		}
+
+		$url = $serviceUrl . '/rest/addresses/' . urlencode($postcode). '/'. urlencode($houseNumber) . '/'. urlencode($houseNumberAddition);
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::API_TIMEOUT);
+		curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+		curl_setopt($ch, CURLOPT_USERPWD, $serviceKey .':'. $serviceSecret);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'BixiePrintshopPostcodenl_plugin');
+		$jsonResponse = curl_exec($ch);
+		$curlError = curl_error($ch);
+		curl_close($ch);
+
+		$response = json_decode($jsonResponse, true);
+
+		$sendResponse = array();
+		if ($serviceShowcase)
+			$sendResponse['showcaseResponse'] = $response;
+
+		if ($serviceDebug)
+		{
+
+			$sendResponse['debugInfo'] = array(
+				'requestUrl' => $url,
+				'rawResponse' => $jsonResponse,
+				'parsedResponse' => $response,
+				'curlError' => $curlError,
+				'configuration' => array(
+					'url' => $serviceUrl,
+					'key' => $serviceKey,
+					'secret' => substr($serviceSecret, 0, 6) .'[hidden]',
+					'showcase' => $serviceShowcase,
+					'debug' => $serviceDebug,
+				)
+			);
+		}
+
+		if (is_array($response) && isset($response['exceptionId']))
+		{
+			switch ($response['exceptionId'])
+			{
+				case 'PostcodeNl_Controller_Address_InvalidPostcodeException':
+					$sendResponse['message'] = 'Postcode niet geldig!';
+					$sendResponse['messageTarget'] = 'postcode';
+					break;
+				case 'PostcodeNl_Service_PostcodeAddress_AddressNotFoundException':
+					$sendResponse['message'] = 'Postcode en huisnummercombinatie niet geldig!';
+					$sendResponse['messageTarget'] = 'huisnummer';
+					break;
+				default:
+					$sendResponse['message'] = 'Fout in opzoeken postcode!';
+					$sendResponse['messageTarget'] = 'huisnummer';
+					break;
+			}
+		}
+		else if (is_array($response) && isset($response['postcode']))
+		{
+			$sendResponse = array_merge($sendResponse, $response);
+		}
+		else
+		{
+			$sendResponse['message'] = 'Postcode.nl niet beschikbaar';
+			$sendResponse['messageTarget'] = 'huisnummer';
+		}
+		return $sendResponse;
+	}
 }
