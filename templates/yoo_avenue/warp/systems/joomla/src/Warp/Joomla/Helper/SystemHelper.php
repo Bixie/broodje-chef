@@ -375,9 +375,9 @@ class SystemHelper extends AbstractHelper
             }
         }
 
-        if ($app->input->get('option') == 'com_zoo' && !in_array($app->input->get('task'), array('submission', 'mysubmissions')) && $a = \App::getInstance('zoo')->zoo->getApplication() and $a->getGroup() == 'blog') {
-            return true;
-        }
+//        if ($app->input->get('option') == 'com_zoo' && !in_array($app->input->get('task'), array('submission', 'mysubmissions')) && $a = \App::getInstance('zoo')->zoo->getApplication() and $a->getGroup() == 'blog') {
+//            return true;
+//        }
 
         return false;
     }
