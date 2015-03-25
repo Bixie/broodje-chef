@@ -7,6 +7,7 @@
 defined('JPATH_BASE') or die;
 
 use \Joomla\Registry\Registry as JRegistry;
+use \Joomla\Utilities\ArrayHelper as JArrayHelper;
 
 /**
  * Plugin class for redirect handling.
@@ -35,33 +36,39 @@ class plgSystemBix_ideal extends JPlugin {
 		//request of return
 		$shopdata = $app->input->get('shopdata',array(),'array');
 		if (count($shopdata)) {
-//echo '<pre>'.$context;
-//print_r(JRequest::get('POST'));
-			$prodIDs = array_keys($shopdata);
-			$db = JFactory::getDbo();
-			$db->setQuery($db->getQuery(true)
-				->select("id, name")
-				->from("#__zoo_item")
-				->where("id IN (".implode(',',$prodIDs).")")
-			);
-			$prodTitels = $db->loadObjectList('id');	
+//echo '<pre>';
+			$prodIDs = array();
+			foreach ($shopdata as $prodIDstring => $prodData) {
+				$prodIDs[] = intval(str_replace('product', '', $prodIDstring));
+			}
+			try {
+				$db = JFactory::getDbo();
+				$db->setQuery($db->getQuery(true)
+					->select("id, name")
+					->from("#__zoo_item")
+					->where("id IN (" . implode(',', $prodIDs) . ")")
+				);
+				$prodTitels = $db->loadObjectList('id');
+			} catch (RuntimeException $e) {
+				return false;
+			}
 //print_r($shopdata);
+//print_r($prodTitels);
 			$html = array();
 			$vervInfo = array();
 			$html[] = '<p><h3>Besteloverzicht</h3>';
 			$html[] = '<table border="0" cellpadding="5" cellspacing="0" width="100%" class="prodtable">';
 			$html[] = '<tbody>';
 			$i = 0;
-			foreach ($shopdata as $productID=>$aantalElement) {
+			foreach ($shopdata as $prodIDstring=>$aantalElement) {
+				$productID = intval(str_replace('product', '', $prodIDstring));
 				$prodhtml = array();
 				$prodaantal = 0;
 				$productNaam = $prodTitels[$productID]->name;
-				foreach ($aantalElement as $identifier=>$productAantal) {
-					foreach ($productAantal as $type=>$aantal) {
-						if ($aantal == 0) continue;
-						$prodhtml[] = '<span>'.ucfirst($type).':</span> <strong>'.$aantal.'</strong><br/>';
-						$prodaantal += $aantal;
-					}
+				foreach ($aantalElement as $type=>$aantal) {
+					if ($aantal == 0) continue;
+					$prodhtml[] = '<span>'.ucfirst($type).':</span> <strong>'.$aantal.'</strong><br/>';
+					$prodaantal += $aantal;
 				}
 				if ($prodaantal) {
 					$k = $i%2;

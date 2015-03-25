@@ -129,8 +129,6 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 						</div>
 					</div>
 				</div>
-				<input type="hidden" id="prijs" name="prijs" value="0">
-				<input type="hidden" id="btw" name="btw" value="0">
 				<h3>Opmerkingen</h3>
 				<textarea name="opmerking" class="uk-width-1-1 opmerking" rows="2" cols="20"></textarea>
 			</div>
@@ -152,12 +150,14 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 						</label>
 					</div>
 				</div>
+				<input type="hidden" id="prijs" name="prijs" value="0">
+				<input type="hidden" id="btw" name="btw" value="0">
 				<button type="submit" class="uk-button uk-button-large uk-button-primary uk-width-1-1 uk-margin-top betalen">
 					<i class="uk-icon-check uk-margin-small-right"></i>Bevestig bestelling</button>
 			</div>
 		</div>
 	</div>
-	<div class="hidden">
+	<div class="uk-hidden">
 		<select name="verzgebied" id="verzgebied" class="uk-width-1-1 required" size="1">
 			<option value="">Maak een keuze</option>
 			<option value="utwente">Business & Science Parc / Campus U-Twente / Havengebied & FC Twente Stadion (Enschede)</option>

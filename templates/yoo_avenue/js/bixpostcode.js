@@ -102,6 +102,7 @@
                         $this.adresFields.filter('.lon').val(pcReturn.response.longitude);
                         $this.stopSpin();
                     }
+                    $this.trigger('response.pc.received');
                 })
                 .always(function (data) {
                     $this.ajaxReq = false;

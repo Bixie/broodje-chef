@@ -52,9 +52,10 @@ class ElementShopaantal extends ElementOption {
 				} else {
 					$title = $option['name'].'. '.$title;
 				}
-				$html[] = '<div class="select"><input id="shopaantal-'.$this->_item->id.$option['value'].'" type="text" 
+				$html[] = '<div class="select"><input data-zoo-product-option="'.$option['value'].'"
+								id="shopaantal-'.$this->_item->id.$option['value'].'" type="text"
 								onfocus="if (this.value==\'0\')this.value=\'\'" onblur="if (this.value==\'\')this.value=\'0\'"
-								class="shopaantal uk-form-small uk-text-right" size="3" title="'.$title.'" name="shopdata['.$this->_item->id.']['.$this->identifier.']['.$option['value'].']" value="0" />';
+								class="shopaantal uk-form-small uk-text-right" size="3" title="'.$title.'" name="shopdata[product'.$this->_item->id.']['.$option['value'].']" value="0" />';
 				if ($params->get('show_buttons',0)) {
 					$html[]  = '<div class="plminbuttons uk-button-group">';
 					$html[]  = '<button type="button" class="uk-button uk-button-mini uk-button-success butt plus" onclick="document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').set(\'value\',(document.id(\'shopaantal-'.$this->_item->id.$option['value'].'\').get(\'value\').toInt()+1))"><i class="uk-icon-plus"></i></button>';
