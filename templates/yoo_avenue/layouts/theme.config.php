@@ -109,6 +109,7 @@ $this['asset']->addFile('js', 'warp:vendor/uikit/js/components/autocomplete.js')
 $this['asset']->addFile('js', 'warp:vendor/uikit/js/components/search.js');
 $this['asset']->addFile('js', 'warp:vendor/uikit/js/components/tooltip.js');
 $this['asset']->addFile('js', 'warp:vendor/uikit/js/components/notify.js');
+$this['asset']->addFile('js', 'warp:vendor/uikit/js/components/datepicker.js');
 $this['asset']->addFile('js', 'js:social.js');
 $this['asset']->addFile('js', 'js:theme.js');
 $this['asset']->addFile('js', 'js:shopform.js');

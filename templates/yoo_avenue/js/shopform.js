@@ -287,4 +287,15 @@
 
     UI.BixZooProductError = BixZooProductError;
 
+    UI.on('beforeready.uk.dom', function () {
+
+        $.extend(UIkit.components.datepicker.prototype.defaults, {
+            i18n: {
+                months: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+                weekdays: ['zon', 'maa', 'din', 'woe', 'don', 'vrij', 'zat']
+            },
+            format: "DD-MM-YYYY"
+        });
+    });
+
 }(jQuery, UIkit));

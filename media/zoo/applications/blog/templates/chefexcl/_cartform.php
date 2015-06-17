@@ -84,7 +84,12 @@ $rekeningGroup = $this->params->get('template.rekeningGroup', 0);
 				<h3>Bezorging en betaling</h3>
 				<div class="uk-form-row">
 					<label class="uk-form-label" for="leverdatum">Leverdatum</label>
-					<div class="uk-form-controls"><?php echo JHtml::_('calendar', date('Y-m-d'), 'leverdatum', 'leverdatum', '%Y-%m-%d', array('class'=>'calendar','size'=>9)); ?></div>
+					<div class="uk-form-controls">
+						<div class="uk-form-icon">
+							<i class="uk-icon-calendar"></i>
+							<input type="" name="leverdatum" data-uk-datepicker="{minDate:'<?php echo JFactory::getDate()->format('d-m-Y'); ?>'}"/>
+						</div>
+					</div>
 				</div>
 				<div class="uk-form-row">
 					<label class="uk-form-label" for="uur">Levertijd</label>

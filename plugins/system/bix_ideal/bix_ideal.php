@@ -96,7 +96,7 @@ class plgSystemBix_ideal extends JPlugin {
 			$html[] = '</tr>';
 			$html[] = '</tbody>';
 			$html[] = '</table><br/>';
-			$userdata = $app->input->post->get('userdata',array());
+			$userdata = $app->input->post->get('userdata', array(), 'array');
 			$html[] = '<h3>Bezorggegevens</h3>';
 			$userMail = 'admin@bixie.nl';
 			foreach ($userdata as $key=>$value) {
@@ -113,10 +113,11 @@ class plgSystemBix_ideal extends JPlugin {
 			$html[] = '</p>';
 			$vervoersInfo = $app->input->post->getString('vervoersInfo','');
 			$leverdatum = $app->input->post->getString('leverdatum','');
+			$leverdatumDate = JFactory::getDate($leverdatum);
 			$uur = $app->input->post->getString('uur','');
 			$minuut = $app->input->post->getString('minuut','');
 			$html[] = '<strong>Verzorgingsgebied:</strong> <span>'.$vervoersInfo.'</span><br/>';
-			$html[] = '<strong>Levertijd:</strong> <span>'.JHtml::_('date',$leverdatum,'DATE_FORMAT_LC3').', '.$uur.':'.$minuut.'</span><br/>';
+			$html[] = '<strong>Levertijd:</strong> <span>'.JHtml::_('date',$leverdatumDate->toSql(true),'DATE_FORMAT_LC3').', '.$uur.':'.$minuut.'</span><br/>';
 			$betaalwijze = $app->input->post->getString('betaalwijze','');
 			$html[] = '<strong>Besteldatum:</strong> <span>'.JHTML::_( 'date', $bestelDatum, "DATE_FORMAT_LC3" ).'</span><br/>';
 			$html[] = '<strong>Betaalmethode:</strong> <span>'.$betaalwijze.'</span><br/>';
